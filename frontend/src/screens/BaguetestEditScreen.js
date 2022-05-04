@@ -13,7 +13,7 @@ const navigate= useNavigate();
 const [name, setName] = useState('');
 const [price, setPrice] = useState('');
 const [image, setImage] = useState('');
-const [category, setCategory] = useState('');
+const [categorie, setCategorie] = useState('');
 const [countInStock, setCountInStock] = useState('');
 const [brand, setBrand] = useState('');
 const [description, setDescription] = useState('');
@@ -30,7 +30,7 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
 
   useEffect(() => {
     if (successUpdate) {
-        navigate('/baguetestList');
+        navigate('/baguetestlist');
       }
     if (!baguetest || baguetest._id !== baguetestId) {
       dispatch(detailsBaguetest(baguetestId));
@@ -38,7 +38,7 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
       setName(baguetest.name);
       setPrice(baguetest.price);
       setImage(baguetest.image);
-      setCategory(baguetest.category);
+      setCategorie(baguetest.categorie);
       setCountInStock(baguetest.countInStock);
       setBrand(baguetest.brand);
       setDescription(baguetest.description);
@@ -53,7 +53,7 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
           name,
           price,
           image,
-          category,
+          categorie,
           brand,
           countInStock,
           description,
@@ -132,8 +132,8 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
                 id="category"
                 type="text"
                 placeholder="Enter category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                value={categorie}
+                onChange={(e) => setCategorie(e.target.value)}
               ></input>
               </div>
             <div>
