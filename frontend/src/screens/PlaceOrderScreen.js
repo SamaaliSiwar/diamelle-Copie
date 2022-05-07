@@ -8,11 +8,11 @@ import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
 export default function PlaceOrderScreen(props)
 {
-    const cart=useSelector((state)=>state.cart);
-const {cartItems} =cart;
-cart.itemsPrice =
-  cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0
+ const cart=useSelector((state)=>state.cart);
+ cart.itemsPrice =
+  cart.cartItems.reduce((a, c) => a + ((c.masse*127+c.carat*2100)*c.nbrpiere)*c.qty, 0
 );
+cart.totalPrice = cart.itemsPrice;
 const navigate=useNavigate();
   const userSignin = useSelector((state) => state.userSignin);
 
@@ -64,7 +64,7 @@ const navigate=useNavigate();
                       <h2>Order</h2>
                       <ul>
                   {cart.cartItems.map((item) => (
-                    <li key={item.product}>
+                    <li key={item.baguetest}>
                       <div className="row">
                         <div>
                           <img
@@ -74,14 +74,22 @@ const navigate=useNavigate();
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
+                          <Link to={`/baguetest/${item.baguetest}`}>
+                           <h5 className="name"> {item.name}</h5>
                           </Link>
                         </div>
-
+                       
                         <div>
-                        {item.price}dt
+                        <div><strong>Discription</strong></div><br/>
+                        <div><h5>Or : {item.or}</h5></div><br/>
+                        <div><h5>Carat : {item.carat}</h5></div><br/>
+                        <div><h5>Quantité : {item.qty}</h5></div><br/>
+                        <div><h5> Prix Totale: 
+                        {cart.totalPrice }dt</h5>
                         </div>
+                        </div>
+
+
                       </div>
                     </li>
                   ))}

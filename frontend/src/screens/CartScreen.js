@@ -6,24 +6,32 @@ import MessageBox from "../componnent/MessageBox";
 
 export default function CartScreen(props)
 {
-const cart=useSelector(state=>state.cart);
-const {cartItems} =cart;
+
 const navigate=useNavigate();
 const params = useParams();
 const baguetestId = params.id;
-const {search} =useLocation();
-const qtyInUrl = new URLSearchParams(search).get('qty');
-const qty = qtyInUrl?Number(qtyInUrl):1;
-const dispatch = useDispatch();
-useEffect(()=>{
-  if(baguetestId){
-    dispatch(addToCart(baguetestId,qty));
-  }
-}, [dispatch, baguetestId, qty]);
+const { search } = useLocation();
+  const qtyInUrl = new URLSearchParams(search).get('qty');
+  const qty = qtyInUrl ? Number(qtyInUrl) : 1;
+  const caratInUrl = new URLSearchParams(search).get('carat');
+  const carat = caratInUrl ? Number(caratInUrl) : 1;
+  const orInUrl = new URLSearchParams(search).get('or');
+  const or = orInUrl ? String(orInUrl) :1;
+
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, error } = cart;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (baguetestId) {
+      dispatch(addToCart(baguetestId, qty,carat,or));
+    }
+  }, [dispatch, baguetestId, qty,carat , or]);
 const removeFromCartHandler = (id) => {
   // delete action
   dispatch(removeFromCart(id));
 };
+
+
 
 const checkoutHandler = () => {
   navigate('/signin?redirect=/shipping');
@@ -51,7 +59,7 @@ const checkoutHandler = () => {
                     <Link to={`/baguetest/${item.baguetest}`} className="min">{item.name}</Link>
                   </div>
                   <div>
-                    <select
+                  <select
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
@@ -66,7 +74,10 @@ const checkoutHandler = () => {
                       ))}
                     </select>
                   </div>
-                  <div>${item.price}</div>
+                  
+                  <div>{((item.masse*127+carat*2100)*item.nbrpiere)*qty}dt</div>
+                  <div></div>
+
                   <div>
                     <button
                       type="button"
@@ -87,7 +98,8 @@ const checkoutHandler = () => {
             <li>
               <h2>
               Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
-                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}dt
+        
+                {cartItems.reduce((a, c) => a +(((c.masse*127+carat*2100)*c.nbrpiere)*qty) , 0)}dt
               </h2>
             </li>
             <li>

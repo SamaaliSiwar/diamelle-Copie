@@ -13,7 +13,6 @@ baguetestRouter.get(
     const categorie = req.query.categorie || '';
     const order = req.query.order || '';
 
-
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
     const categorieFilter = categorie ? { categorie } : {};
     const sortOrder =
@@ -49,7 +48,7 @@ baguetestRouter.get(
 baguetestRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    //await Baguetest.remove({});
+  //await Baguetest.remove({});
     const createdBaguestest = await Baguetest.insertMany(data.baguestest);
     res.send({ createdBaguestest });
   })

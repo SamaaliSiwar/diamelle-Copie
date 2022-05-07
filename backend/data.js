@@ -23,6 +23,9 @@ const data ={
       image:'/images/bague1.jpg',
       countInStock: 12,
       brand: 'diamelle',
+      masse:'7',
+      nbrpiere:'1',
+
       rating: 4.5,
       numReviews: 15,
       description: ' disponible en or blanc / jaune / rose 18K Bague Solitaire Buutterfly ',
@@ -35,6 +38,9 @@ const data ={
       image:'/images/bague2.jpg',
       countInStock: 10,
       brand: 'diamelle',
+      masse:'5',
+      nbrpiere:'1',
+
       rating: 4.5,
       numReviews: 15,
       description: ' Bague Solitaire Buutterfly Avec Double Diamants sur les cotés',
@@ -46,6 +52,9 @@ const data ={
       image:'/images/bague3.jpg',
       countInStock: 12,
       brand: 'diamelle',
+      masse:'8',
+      nbrpiere:'3',
+
       rating: 4.5,
       numReviews: 15,
       description: 'Bague de Fiançailles  Trilogie',
@@ -57,6 +66,8 @@ const data ={
       image:'/images/bague4.jpg',
       countInStock: 0,
       brand: 'diamelle',
+      masse:'4',
+      nbrpiere:'1',
       rating: 4.5,
       numReviews: 15,
       description: ' Bague Solitaire Only LOVE Avec Double Diamants Sur Les Cotés',

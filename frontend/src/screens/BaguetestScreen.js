@@ -11,10 +11,15 @@ import { BAGUETEST_REVIEW_CREATE_RESET } from "../constants/baguetestconstants";
 
 export default function BaguetestScreen(props)
 { 
+ 
     const params=useParams();
     const Navigate =useNavigate();
   const {id:baguetestId}=params;
   const [qty, setQty] = useState(1);
+  const [carat, setCarat] = useState(0.4);
+  const [or, setOr] = useState("blanc");
+
+
   const dispatch=useDispatch();
     const baguetestDetails = useSelector(state => state.baguetestDetails);
     const { loading, error, baguetest } = baguetestDetails;
@@ -40,7 +45,7 @@ export default function BaguetestScreen(props)
         dispatch(detailsBaguetest(baguetestId));
       },[dispatch,baguetestId,successReviewCreate]);
       const addToCartHandle = () => {
-        Navigate (`/cart/${baguetestId}?qty=${qty}`);
+        Navigate (`/cart/${baguetestId}?qty=${qty}&carat=${carat}&or=${or}`);
         };
         const submitHandler = (e) => {
           e.preventDefault();
@@ -78,7 +83,7 @@ export default function BaguetestScreen(props)
               
                 <ul>
                   <li>
-                    <h1 className="prodtitle">{baguetest.name}</h1>
+                    <h1 className="prodtitle">{baguetest.name} <p>A partir de {baguetest.price}dt</p></h1>
                   </li><br/>
                   <li>
                   <h2>
@@ -86,24 +91,47 @@ export default function BaguetestScreen(props)
                     </h2>
                     <p className="discrip">{baguetest.description}</p>
                   </li><br/>
-                  <li className="discrip">Pirx:<p className="price">A partir de {baguetest.price}dt</p></li><br/>
+                 
+                  <li>
+              
+                                  <div>
+                                  <form>
+                                  <strong>Selectionner l'or</strong>
+                                  <div class="radio-group">
+                             <input type="radio" id="option-one" name="selector" value="orBlanc" onChange={e=>setOr(e.target.value)}/>
+                           <label for="option-one">
+                           <img className="icone" src="../images/ORBLANC.jpg"/> </label>
+                           <input type="radio" id="option-two" name="selector" value="orJaune" onChange={e=>setOr(e.target.value)}/>
+                                <label for="option-two">
+                                <img className="icone" src="../images/ORJAUNE.jpg"/></label>
+                                  <input type="radio" id="option-three" name="selector" value="orRose" onChange={e=>setOr(e.target.value)}/>
+                                       <label for="option-three"><img className="icone or" src="../images/ORROSE.jpg"/></label><br/>
+                                       
+                                          </div><br/>
+                                          </form><br/>
+                                          <div id="form-wrapper">
+                                          <form>
+                                  <strong>Selectionner carat</strong>
+                                  <div class="radio-group">
+                             <input type="radio" id="propone" name="selector" value="0.4" onChange={e=>setCarat(e.target.value)}/>
+                           <label for="propone">
+                           0.4 ct </label>
+                           <input type="radio" id="proptwo" name="selector" value="0.7" onChange={e=>setCarat(e.target.value)} />
+                                <label for="proptwo">
+                                0.7 ct</label>
+                                  <input type="radio" id="propthree" name="selector" value="0.8" onChange={e=>setCarat(e.target.value)}/>
+                                       <label for="propthree">0.8 ct</label><br/>
+                                       
+                                          </div><br/>
+                                          </form>
+	
+</div>
+                                        
+                                 </div>
+      
+                      </li>
                   
-                  <li>
-                  <h2>Avis : </h2><br/>
-                    <Rating
-                      rating={baguetest.rating}
-                      numReviews={baguetest.numReviews}
-                    ></Rating>
-                  </li><br></br>
-                  <li>
-                    <select>
-                    
-                    <option><img src="../images/ORBLANC.jpg"/></option>
-                    <option><img src="../images/ORJAUNE.jpg"/></option>
-                    <option><img src="../images/ORROSE.jpg"/></option>
-                              
-                       </select>
-                  </li>
+                
                  
                 </ul>
               </div>
@@ -113,7 +141,7 @@ export default function BaguetestScreen(props)
                     <li>
                       <div className="row">
                         <div className="discrip">Prix :  </div>
-                        <div ><p className="price"> {baguetest.price}dt</p></div>
+                        <div ><p className="price"> {baguetest.masse*127+ carat*baguetest.nbrpiere*2200}dt</p></div>
                       </div>
                     </li><br/>
                     <li>
@@ -150,20 +178,22 @@ export default function BaguetestScreen(props)
                           </div>
                         </div>
                       </li><br/>
-                     
-                      </>
-
-                     )}
-                     <li> <button
+                      <li> <button
                          onClick={addToCartHandle}
                           className="primary block"
                         >Add to Cart</button>
                   </li>
+                     
+                      </>
+
+                     )}
+                    
                    
                     </ul>
                     </div>
                     </div><br/>
-                    <div>
+
+                    <div> 
             <h2 id="reviews">Reviews</h2>
             {baguetest.reviews.length === 0 && (
               <MessageBox>There is no review</MessageBox>

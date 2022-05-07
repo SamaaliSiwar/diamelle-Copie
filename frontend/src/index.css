@@ -870,7 +870,48 @@ margin-right: 80px;
 .support-users .unread {
   background-color: #f02020;
 }
+/****/
 
+body {
+  background-color:white;
+  font-family: roboto;
+}
 
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
 
+label {
+  color: lighten(#808080,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 4px 10px;
+}
 
+input[type=radio]:checked + label{
+  color: lighten(grayscale,60%);
+  background-color:#a4a4a4;
+}
+
+label + input[type=radio] + label {
+  border-left: solid ;
+}
+.radio-group {
+  border:  groove ;
+  display: inline-flex;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.icone + .or{
+  width: 38px;
+  height: 51px;
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+/*************************************/
+.name{
+  color: #000;
+}

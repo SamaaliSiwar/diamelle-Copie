@@ -1,21 +1,43 @@
 import Axios from 'axios';
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartconstants';
+import { CART_ADD_ITEM, 
+  CART_ADD_ITEM_FAIL,
+   CART_REMOVE_ITEM,
+    CART_SAVE_PAYMENT_METHOD,
+     CART_SAVE_SHIPPING_ADDRESS } from '../constants/cartconstants';
 
-export const addToCart = (baguetestId, qty) => async (dispatch, getState) => {
+export const addToCart = (baguetestId ,qty,carat,or) => async (dispatch, getState) => {
   const { data } = await Axios.get(`/api/baguestest/${baguetestId}`);
-  dispatch({
-    type: CART_ADD_ITEM,
-    payload: {
-      name: data.name,
-      image: data.image,
-      price: data.price,
-      countInStock: data.countInStock,
-      baguetest: data._id,
-      qty,
-    },
-  });
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+  const {
+    cart: { cartItems },
+  } = getState();
+  if (cartItems.length = 0 ) {
+    dispatch({
+      type: CART_ADD_ITEM_FAIL,
+      payload: `Can't Add To Cart`,
+    });
+  } else {
+    dispatch({
+      type: CART_ADD_ITEM,
+      payload: {
+        name: data.name,
+        image: data.image,
+        price: data.price,
+        countInStock: data.countInStock,
+        baguetest: data._id,
+        masse:data.masse,
+        nbrpiere:data.nbrpiere,
+        qty,
+        carat,
+        or,
+      },
+    });
+    localStorage.setItem(
+      'cartItems',
+      JSON.stringify(getState().cart.cartItems)
+    );
+  }
 };
+
 //updatelocalstroage
 export const removeFromCart = (baguetestId) => (dispatch, getState) => {
   dispatch({ type: CART_REMOVE_ITEM, payload: baguetestId });

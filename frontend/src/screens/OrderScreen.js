@@ -10,12 +10,16 @@ export default function OrderScreen(props) {
     const { id: orderId } = params;
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+ 
+  
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsOrder(orderId));
   }, [dispatch, orderId]);
+  const baguetestDetails = useSelector(state => state.baguetestDetails);
+    const { baguetest } = baguetestDetails;
  
   
   return loading ? (
@@ -67,7 +71,7 @@ export default function OrderScreen(props) {
                 <h2>Order Items</h2>
                 <ul>
                   {order.orderItems.map((item) => (
-                    <li key={item.product}>
+                    <li key={item.baguetest}>
                       <div className="row">
                         <div>
                           <img
@@ -77,13 +81,17 @@ export default function OrderScreen(props) {
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
+                          <Link to={`/baguetest/${item.baguetest}`}>
+                            <h5 className='name'>{item.name}</h5>
                           </Link>
                         </div>
 
                         <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                        <div><strong>Discription</strong></div><br/>
+                        <div><h5>Or : {item.or}</h5></div><br/>
+                        <div><h5>Carat : {item.carat}</h5></div><br/>
+                        <div><h5>Quantité : {item.qty}</h5></div><br/>
+                        
                         </div>
                       </div>
                     </li>
@@ -99,17 +107,12 @@ export default function OrderScreen(props) {
               <li>
                 <h2>Order Summary</h2>
               </li>
-              <li>
-                <div className="row">
-                  <div>Items</div>
-                  <div>${order.itemsPrice}</div>
-                </div>
-              </li>
+              
               <li>
               <div className="row">
                   <div><strong>Order Total: </strong></div>
                   <div><strong>  
-                   {order.itemsPrice}dt</strong></div>
+                  {order.totalPrice}dt</strong></div>
               </div>
           </li>
             </ul>
