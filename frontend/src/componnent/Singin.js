@@ -29,6 +29,9 @@ export default function Singin()
                     <Link to="/orderhistory">Order History</Link>
                   </li>
                   <li>
+                    <Link to="/recommandationhistory">mes recommandations</Link>
+                  </li>
+                  <li>
                     <Link to="#signout" onClick={signoutHandler}>
                       Sign Out
                     </Link>
@@ -51,7 +54,13 @@ export default function Singin()
                     <Link to="/baguetestlist">Products</Link>
                   </li>
                   <li>
+                    <Link to="/diamantlist">Diamants</Link>
+                  </li>
+                  <li>
                     <Link to="/orderlist">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/recommandationliste">recommandation de diamant</Link>
                   </li>
                   <li>
                     <Link to="/userlist">Users</Link>

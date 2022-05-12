@@ -25,6 +25,8 @@ orderRouter.post(
           shippingAddress: req.body.shippingAddress,
           paymentMethod: req.body.paymentMethod,
           itemsPrice: req.body.itemsPrice,
+          itemPrice: req.body.itemPrice,
+
           shippingPrice: req.body.shippingPrice,
           totalPrice: req.body.totalPrice,
           user: req.user._id,

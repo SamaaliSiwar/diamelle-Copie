@@ -11,6 +11,11 @@ const params=useParams();
 const {id: baguetestId}=params;
 const navigate= useNavigate();
 const [name, setName] = useState('');
+const [displayhome, setDisplayhome] = useState('');
+const [masse, setMasse] = useState('');
+const [nbrpiere, setNbrpiere] = useState('');
+const [choicecarat, setChoicecarat] = useState('');
+const [simpleproduct, setSimpleproduct] = useState('');
 const [price, setPrice] = useState('');
 const [image, setImage] = useState('');
 const [categorie, setCategorie] = useState('');
@@ -42,6 +47,11 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
       setCountInStock(baguetest.countInStock);
       setBrand(baguetest.brand);
       setDescription(baguetest.description);
+      setNbrpiere(baguetest.nbrpiere);
+      setMasse(baguetest.masse);
+      setDisplayhome(baguetest.displayhome);
+      setChoicecarat(baguetest.choicecarat);
+      setSimpleproduct(baguetest.simpleproduct);
     }
   }, [baguetest, dispatch, baguetestId, successUpdate, navigate]);
   const submitHandler = (e) => {
@@ -57,6 +67,11 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
           brand,
           countInStock,
           description,
+          displayhome,
+          nbrpiere,
+          masse,
+          simpleproduct,
+          choicecarat,
         })
       );
   };
@@ -116,6 +131,25 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
             </div>
+            <div>
+            <label htmlFor="masse">Poids</label>
+              <input
+                id="masse"
+                type="text"
+                placeholder="Enter poids"
+                value={masse}
+                onChange={(e) => setMasse(e.target.value)}
+              ></input>
+              </div>
+              <div> <label htmlFor="nbrpiere">Nombre de piere</label>
+              <input
+                id="nbrpiere"
+                type="text"
+                placeholder="Enter Nombre de piere"
+                value={nbrpiere}
+                onChange={(e) => setNbrpiere(e.target.value)}
+              ></input>
+              </div>
             <div>
               <label htmlFor="image">Image</label>
               <input
@@ -179,6 +213,36 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
+            </div>
+            
+            <div>
+              <label htmlFor="choicecarat">Disponible on tout carat</label>
+              <input
+                id="choicecarat"
+                type="checkbox"
+                checked={choicecarat}
+                onChange={(e) => setChoicecarat(e.target.checked)}
+              ></input>
+            </div>
+            
+            <div>
+              <label htmlFor="simpleproduct">simple produit</label>
+              <input
+                id="simpleproduct"
+                type="checkbox"
+                checked={simpleproduct}
+                onChange={(e) => setSimpleproduct(e.target.checked)}
+              ></input>
+            </div>
+            
+            <div>
+              <label htmlFor="displayhome">Afficher dans la page d'acueil</label>
+              <input
+                id="displayhoma"
+                type="checkbox"
+                checked={displayhome}
+                onChange={(e) => setDisplayhome(e.target.checked)}
+              ></input>
             </div>
             <div>
               <label></label>

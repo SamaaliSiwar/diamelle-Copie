@@ -93,11 +93,15 @@ export default function BaguetestScreen(props)
                   </li><br/>
                  
                   <li>
-              
+                              
+                                  <div>
+                                  
                                   <div>
                                   <form>
+                                  { baguetest.simpleproduct= false && 
+                                  <div>
                                   <strong>Selectionner l'or</strong>
-                                  <div class="radio-group">
+                                  <div class="radio-group " id="radiogroup2">
                              <input type="radio" id="option-one" name="selector" value="orBlanc" onChange={e=>setOr(e.target.value)}/>
                            <label for="option-one">
                            <img className="icone" src="../images/ORBLANC.jpg"/> </label>
@@ -107,10 +111,19 @@ export default function BaguetestScreen(props)
                                   <input type="radio" id="option-three" name="selector" value="orRose" onChange={e=>setOr(e.target.value)}/>
                                        <label for="option-three"><img className="icone or" src="../images/ORROSE.jpg"/></label><br/>
                                        
-                                          </div><br/>
+                                          </div>
+                                            </div>
+                                  }
+                                          <br/>
                                           </form><br/>
+                                          </div>
+                                 
+                                          {baguetest.choicecarat &&
                                           <div id="form-wrapper">
+                                          
                                           <form>
+                                          
+                                      
                                   <strong>Selectionner carat</strong>
                                   <div class="radio-group">
                              <input type="radio" id="propone" name="selector" value="0.4" onChange={e=>setCarat(e.target.value)}/>
@@ -126,6 +139,7 @@ export default function BaguetestScreen(props)
                                           </form>
 	
 </div>
+}
                                         
                                  </div>
       
@@ -141,7 +155,11 @@ export default function BaguetestScreen(props)
                     <li>
                       <div className="row">
                         <div className="discrip">Prix :  </div>
+                        {baguetest.choicecarat? (
                         <div ><p className="price"> {baguetest.masse*127+ carat*baguetest.nbrpiere*2200}dt</p></div>
+                        ):(
+                          <div>{baguetest.price}</div>
+                        )}
                       </div>
                     </li><br/>
                     <li>

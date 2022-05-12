@@ -19,7 +19,7 @@ export default function BaguetestListScreen(props) {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdBaguetest,
+    baguetest: createdBaguetest,
   } = baguetestCreate;
   const baguetestDelete = useSelector((state) => state.baguetestDelete);
   const {
@@ -34,7 +34,7 @@ export default function BaguetestListScreen(props) {
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: BAGUETEST_CREATE_RESET });
-      navigate(`/baguetest/${createdBaguetest}/create`);
+      navigate(`/baguetest/${createdBaguetest._id}/edit`);
     }
     if (successDelete) {
       dispatch({ type: BAGUETEST_DELETE_RESET });
@@ -57,6 +57,8 @@ export default function BaguetestListScreen(props) {
   const deleteHandler = (baguetest) => {
     if (window.confirm('Are you sure to delete?')) {
       dispatch(deleteBaguetest(baguetest._id));
+      window.location.reload('/baguetestlist');
+
     }
   };
   

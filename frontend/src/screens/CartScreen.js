@@ -74,8 +74,11 @@ const checkoutHandler = () => {
                       ))}
                     </select>
                   </div>
-                  
+                  {item.choicecarat ?(
                   <div>{((item.masse*127+carat*2100)*item.nbrpiere)*qty}dt</div>
+                  ):(
+                    <div>{item.price}</div>
+                  )}
                   <div></div>
 
                   <div>
@@ -96,11 +99,22 @@ const checkoutHandler = () => {
         <div className="card card-body">
           <ul>
             <li>
+            {cartItems.choicecarat?(
               <h2>
-              Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
+              Subtotal 
+             
+            
+              ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
         
-                {cartItems.reduce((a, c) => a +(((c.masse*127+carat*2100)*c.nbrpiere)*qty) , 0)}dt
+                {cartItems.reduce((a, c) => a +((c.masse*127+carat*2100*c.nbrpiere)*qty) , 0)}dt
               </h2>
+              ):(
+                <h2>
+                  Subtotal
+                  ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
+                  {cartItems.reduce((a, c) => a +((c.price)*qty) , 0)}
+                </h2>
+              )}
             </li>
             <li>
               <button

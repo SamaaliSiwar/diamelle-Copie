@@ -109,12 +109,17 @@ export default function HomeScreen()
 
 
 
-
+                       
                   <div className="row ">
+                  
                     {baguestest.map((baguestest) => (
+                      
                       <Baguetest key={baguestest._id} baguetest={baguestest}></Baguetest>
+                      
                     ))}
+                    
                   </div>
+                       
                 </div></>
 )}
 </div>

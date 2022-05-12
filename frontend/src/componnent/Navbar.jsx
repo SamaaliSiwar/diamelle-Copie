@@ -127,7 +127,7 @@ const Navbar = () => {
       <nav>
         <ul className="nav">
         <li><Categorieelemt/></li>
-         <li><Link className="navlink" to="/">Nos Diamants</Link></li>
+         <li><Link className="navlink" to="/diamants">Nos Diamants</Link></li>
           <li><Link  to="/about" className="navlink">About</Link></li>
           <li><Link to="/" className="navlink">Contact</Link></li>
          

@@ -12,6 +12,7 @@ export default function PaymentMethodScreen(props){
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate('/placeorder');
+    
   };
   const navigate=useNavigate();
   const userSignin = useSelector((state) => state.userSignin);

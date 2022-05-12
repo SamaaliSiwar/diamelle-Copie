@@ -26,6 +26,17 @@ import { useSelector } from 'react-redux';
 import ChatBox from './componnent/ChatBox';
 import alanBtn from '@alan-ai/alan-sdk-web';
 import Support from './screens/SupportScreen';
+import DiamantScreen from './screens/DiamantScreen';
+import RecommandationScreen from './screens/RecommandationScreen';
+import LaivraisonAddressScreen from './screens/LaivraisonAddressScreen';
+import PaymentRecommandationScreen from './screens/PaymentRecommandationScreen';
+import PlaceRecommandationScreen from './screens/PlaceCommandeScreen';
+import CommandeScreen from './screens/CommandeScreen';
+import AlldiamantScreen from './screens/AlldiamantScreen';
+import CommandeListScreen from './screens/CommandeListScreen';
+import CommandeHistoryScreen from './screens/CommandeHistoryScreen';
+import DiamantEditScreen from './screens/DiamantEditScreen';
+import DiamantListScreen from './screens/DiamantListScreen';
 
 function App () {
   const userSignin = useSelector((state) => state.userSignin);
@@ -45,12 +56,23 @@ function App () {
         <Routes>
         <Route path="/cart" element={<CartScreen/>}></Route>
   <Route path="/cart/:id" element={<CartScreen/>}></Route>
+  <Route path="/recommandation" element={<RecommandationScreen/>}></Route>
+  <Route path="/recommandation/:id" element={<RecommandationScreen/>}></Route>
         <Route path="/" element={ <HomeScreen/> } exact></Route>
+        <Route path="/diamants" element={ <AlldiamantScreen/> } exact></Route>
+
         <Route path="/about" element={<AboutScreen/>}></Route>
         <Route path="/baguetest/:id" element={<BaguetestScreen/>} exact></Route>
+        <Route path="/diamant/:id" element={<DiamantScreen/>} exact></Route>
+
         <Route
             path="/baguetest/:id/edit"
             element={<BaguetestEditScreen/>}
+            exact
+          ></Route>
+            <Route
+            path="/diamant/:id/edit"
+            element={<DiamantEditScreen/>}
             exact
           ></Route>
        <Route path='/signin' element={<SigninScreen/>} exact></Route> 
@@ -63,9 +85,22 @@ function App () {
        </PrivateRoute>}
 
        />
+       <Route path="/laivraison" 
+       element={
+       <PrivateRoute>
+
+       <LaivraisonAddressScreen/>
+       </PrivateRoute>}
+
+       />
        <Route path="/payment" element={
          <PrivateRoute>
        <PaymentMethodScreen/>
+       </PrivateRoute>}
+       />
+       <Route path="/paymentrecommandation" element={
+         <PrivateRoute>
+       <PaymentRecommandationScreen/>
        </PrivateRoute>}
 
        />
@@ -74,9 +109,18 @@ function App () {
        <PlaceOrderScreen/></PrivateRoute>}
 
        />
+        <Route path="/placerecommandation" element={
+         <PrivateRoute>
+       <PlaceRecommandationScreen/></PrivateRoute>}
+
+       />
        <Route path="/order/:id" element={
          <PrivateRoute>
        <OrderScreen/>
+       </PrivateRoute>}/>
+       <Route path="/commande/:id" element={
+         <PrivateRoute>
+       <CommandeScreen/>
        </PrivateRoute>}/>
        <Route path="/orderhistory" element={
          <PrivateRoute>
@@ -91,11 +135,27 @@ function App () {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/recommandationhistory"
+              element={
+                <PrivateRoute>
+                  <CommandeHistoryScreen />
+                </PrivateRoute>
+              }
+            />
              <Route
               path="/baguetestlist"
               element={
                 <AdminRoute>
               <BaguetestListScreen/>
+                </AdminRoute>
+              }
+            />
+             <Route
+              path="/diamantlist"
+              element={
+                <AdminRoute>
+              <DiamantListScreen/>
                 </AdminRoute>
               }
             />
@@ -151,6 +211,14 @@ function App () {
               element={
                 <AdminRoute>
           <SupportScreen/>
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/recommandationliste"
+              element={
+                <AdminRoute>
+          <CommandeListScreen/>
                 </AdminRoute>
               }
             />

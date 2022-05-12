@@ -18,12 +18,17 @@ const baguetestSchema = new mongoose.Schema(
     brand: { type: String, required: true },
     categorie: { type: String, required: true },
     description: { type: String, required: true },
-    masse: { type: Number, required: true },
-    nbrpiere: { type: Number, required: true },
+    masse: { type: Number, required: false },
+    nbrpiere: { type: Number, required: false },
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
     rating: { type: Number, required: true },
     numReviews: { type: Number, required: true },
+    displayhome:{ type:Boolean,required:false},
+    choicecarat:{ type:Boolean,required:true},
+    simpleproduct:{ type:Boolean,required:true},
+
+
     reviews: [reviewSchema],
 
   },

@@ -12,6 +12,10 @@ export default function PlaceOrderScreen(props)
  cart.itemsPrice =
   cart.cartItems.reduce((a, c) => a + ((c.masse*127+c.carat*2100)*c.nbrpiere)*c.qty, 0
 );
+cart.itemPrice=
+cart.cartItems.reduce((a, c) => a + (c.price)*c.qty, 0
+);
+
 cart.totalPrice = cart.itemsPrice;
 const navigate=useNavigate();
   const userSignin = useSelector((state) => state.userSignin);
@@ -26,6 +30,7 @@ const navigate=useNavigate();
       dispatch(createOrder({...cart, orderItems: cart.cartItems}));
 
     };
+  
     const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
   useEffect(() => {
@@ -82,11 +87,20 @@ const navigate=useNavigate();
                         <div>
                         <div><strong>Discription</strong></div><br/>
                         <div><h5>Or : {item.or}</h5></div><br/>
-                        <div><h5>Carat : {item.carat}</h5></div><br/>
+                        {item.choicecarat &&
+                        <div><h5>Carat : {item.carat}</h5></div>
+                         }
+                         <br/>
                         <div><h5>Quantité : {item.qty}</h5></div><br/>
+                        {item.choicecarat ?(
                         <div><h5> Prix Totale: 
                         {cart.totalPrice }dt</h5>
                         </div>
+                        ):(
+                          <div><h5> Prix Totale: 
+                        {cart.itemPrice}dt</h5>
+                        </div>
+                        )}
                         </div>
 
 
@@ -110,8 +124,13 @@ const navigate=useNavigate();
           <li>
               <div className="row">
                   <div><strong>Order Total: </strong></div>
+                  {cart.choicecarat ?(
                   <div><strong>  
                    {cart.itemsPrice}dt</strong></div>
+                   ):(
+                    <div><strong>  
+                   {cart.itemPrice}dt</strong></div>
+                   )}
               </div>
           </li>
           <li>

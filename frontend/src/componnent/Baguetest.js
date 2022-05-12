@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 export default function Baguetest(props){
     const{baguetest}=props;
     return(
+      <>
+       {baguetest.displayhome &&
+      
 <div key={baguetest._id}  class="col-md-3">
 <div class="wsk-cp-product">
   <div class="wsk-cp-img"><img src={baguetest.image} alt="Product" class="img-responsive" /></div>
@@ -20,4 +23,8 @@ export default function Baguetest(props){
   
 </div>
 </div>
-)}
+       }
+
+ </>
+);
+}

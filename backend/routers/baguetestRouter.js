@@ -80,6 +80,10 @@ baguetestRouter.post(
       rating: 0,
       numReviews: 0,
       description: 'sample description',
+      choicecarat:true,
+      displayhome:false, 
+      simpleproduct:false,
+
     });
     const createdBaguestest = await baguetest.save();
     res.send({ message: 'Product Created', baguetest: createdBaguestest });
@@ -100,6 +104,12 @@ baguetestRouter.put(
       baguetest.brand = req.body.brand;
       baguetest.countInStock = req.body.countInStock;
       baguetest.description = req.body.description;
+      baguetest.displayhome= req.body.displayhome;
+      baguetest.choicecarat= req.body.choicecarat;
+      baguetest.simpleproduct= req.body.simpleproduct;
+
+
+
       const updatedBaguetest = await baguetest.save();
       res.send({ message: 'Product Updated', baguetest: updatedBaguetest});
     } else {

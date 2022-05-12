@@ -6,6 +6,8 @@ import baguetestRouter from './routers/baguetestRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import uploadRouter from './routers/uploadRouter.js';
 import path from 'path';
+import diamantRouter from './routers/diamantRouter.js';
+import commandeRouter from './routers/commandeRouter.js';
 
 dotenv.config();
 const app = express();
@@ -16,7 +18,12 @@ app.use(express.urlencoded({extended: true}));
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1/diamelle');
 app.use('/api/users', userRouter);
 app.use('/api/baguestest', baguetestRouter);
+app.use('/api/diamants', diamantRouter);
+
+
 app.use('/api/orders', orderRouter);
+app.use('/api/commandes', commandeRouter);
+
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))

@@ -89,7 +89,8 @@ export default function OrderScreen(props) {
                         <div>
                         <div><strong>Discription</strong></div><br/>
                         <div><h5>Or : {item.or}</h5></div><br/>
-                        <div><h5>Carat : {item.carat}</h5></div><br/>
+                        {item.choicecarat &&
+                        <div><h5>Carat : {item.carat}</h5></div>}<br/>
                         <div><h5>Quantité : {item.qty}</h5></div><br/>
                         
                         </div>
@@ -111,8 +112,14 @@ export default function OrderScreen(props) {
               <li>
               <div className="row">
                   <div><strong>Order Total: </strong></div>
+                  {order.choicecarat?(
                   <div><strong>  
                   {order.totalPrice}dt</strong></div>
+                  ):(
+                    <div><strong>
+                    {order.itemPrice}</strong>
+                    </div>
+                  )}
               </div>
           </li>
             </ul>
