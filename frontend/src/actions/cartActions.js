@@ -7,15 +7,7 @@ import { CART_ADD_ITEM,
 
 export const addToCart = (baguetestId ,qty,carat,or) => async (dispatch, getState) => {
   const { data } = await Axios.get(`/api/baguestest/${baguetestId}`);
-  const {
-    cart: { cartItems },
-  } = getState();
-  if (cartItems.length = 0 ) {
-    dispatch({
-      type: CART_ADD_ITEM_FAIL,
-      payload: `Can't Add To Cart`,
-    });
-  } else {
+
     dispatch({
       type: CART_ADD_ITEM,
       payload: {
@@ -35,8 +27,7 @@ export const addToCart = (baguetestId ,qty,carat,or) => async (dispatch, getStat
       'cartItems',
       JSON.stringify(getState().cart.cartItems)
     );
-  }
-};
+    };
 
 //updatelocalstroage
 export const removeFromCart = (baguetestId) => (dispatch, getState) => {

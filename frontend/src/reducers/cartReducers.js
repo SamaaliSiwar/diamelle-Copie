@@ -17,7 +17,13 @@ import { CART_ADD_ITEM, CART_EMPTY
           };
         } else {
           return { ...state, error: '', cartItems: [...state.cartItems, item] };
-        }
+        };
+      case CART_REMOVE_ITEM:
+        return {
+          ...state,
+          error: '',
+          cartItems: state.cartItems.filter((x) => x.baguetest !== action.payload),
+        };
       case CART_REMOVE_ITEM:
         return {
           ...state,

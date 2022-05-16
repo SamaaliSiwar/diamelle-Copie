@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {  Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
-import Zoom from 'react-img-zoom';
-
-
 import { detailsDiamant } from "../actions/diamantActions";
+import Zoom from "react-img-zoom";
 
 
 export default function DiamantScreen(props)
@@ -40,7 +38,6 @@ export default function DiamantScreen(props)
         Navigate (`/recommandation/${diamantId}?&or=${or}&support=${support}&taille=${taille}&supportprice=${supportprice}`);
         };
         
-        
     return(
         <div>
         {loading ? (
@@ -52,17 +49,15 @@ export default function DiamantScreen(props)
            
             <div className="row top">
               <div className="col-2">
-              <Zoom id="loading"
-             img={diamant.image}
-               zoomScale={2}
+            
+              <Zoom
+               zoomScale={3}
               width={500}
                height={500}
-                    />
-                    
-              
-                    
-                
-              </div>
+                  src={diamant.image}
+                    img={diamant.image}
+                  />
+                     </div>
       
               <div className="col-1">
               

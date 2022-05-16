@@ -1,4 +1,4 @@
-import axios from "axios";
+import  Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -71,19 +71,21 @@ const diamantDetails = useSelector((state) => state.diamantDetails);
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
     setLoadingUpload(true);
     try {
-      const { data } = await axios.post('/api/uploads', bodyFormData, {
+      const { data } = await Axios.post('/api/uploads', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${userInfo.token}`,
         },
       });
       setImage(data);
+      
       setLoadingUpload(false);
     } catch (error) {
       setErrorUpload(error.message);

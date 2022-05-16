@@ -4,10 +4,10 @@ import userRouter from './routers/userRouter.js';
 import dotenv from 'dotenv';
 import baguetestRouter from './routers/baguetestRouter.js';
 import orderRouter from './routers/orderRouter.js';
-import uploadRouter from './routers/uploadRouter.js';
 import path from 'path';
 import diamantRouter from './routers/diamantRouter.js';
 import commandeRouter from './routers/commandeRouter.js';
+import uploadRouter from './routers/uploadRouter.js';
 
 dotenv.config();
 const app = express();
@@ -26,8 +26,7 @@ app.use('/api/commandes', commandeRouter);
 
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-
+app.use('/uploads', express.static(path.join(__dirname, '/uploads/')));
 
 
 app.get('/', (req, res) => {
