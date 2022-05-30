@@ -4,7 +4,23 @@ import data from "../data.js";
 import expressAsyncHandler from 'express-async-handler';
 import User from "../models/userModel.js";
 import { generateToken, isAdmin, isAuth } from "../util.js";
+import PasswordReset from "../models/passwordresetModel.js";
+import nodemailer from "nodemailer";
+import { v4 as uuidv4 } from "uuid";
+
 const userRouter = express.Router();
+const user = "diamellepfe@gmail.com";
+const pass = "diamelle12345";
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: user,
+        pass: pass,
+    },
+});
+
+
+
 
 userRouter.get(
   '/seed',
@@ -120,7 +136,6 @@ userRouter.delete(
 );
 userRouter.put(
   '/:id',
-  isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
@@ -128,7 +143,7 @@ userRouter.put(
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.isAdmin = Boolean(req.body.isAdmin);
-      // user.isAdmin = req.body.isAdmin || user.isAdmin;
+      ///user.isAdmin = req.body.isAdmin || user.isAdmin;
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });
     } else {
@@ -136,4 +151,256 @@ userRouter.put(
     }
   })
 );
+userRouter.post(
+  '/forget',expressAsyncHandler(async (req, res) => {
+ const { email,redicectUrl}=req.body;
+ //chercher si l'email existe
+  User.find({email})
+  .then((data)=>{
+    if(data.length)
+{
+//user existe
+//proceesd with email
+sendResetEmail(data[0],redicectUrl,res);
+}
+else{
+res.json({
+  status:"FAILED",
+  message:"No account with this email"
+})
+}
+  })
+  .catch(error=>{
+    console.log(error);
+    res.json({
+      status:"FAILED",
+      message:"user does not existe"
+    })
+  })
+  }
+
+))
+//send password reset
+const sendResetEmail= ({_id,email},redictUrl,res)=>{
+  const resetString = uuidv4() + _id;
+  //clear existing reset record
+  PasswordReset
+  .deleteMany({userId:_id})
+  .then(
+    result=>{
+      //delete success
+      //send email
+      const sendForgotPassword = {
+      
+            from: user,
+            to: email,
+            subject: "Lien pour réinitialiser le mot de passe",
+            html: `<div>
+            'Vous recevez ceci parce que vous (ou quelqu'un d'autre) avez demandé la réinitialisation du mot de passe de votre compte.\n\n
+            Veuillez cliquer sur le lien suivant ou collez-le dans votre navigateur pour terminer le processus dans l'heure suivant sa réception :\n\n 
+            <a href=${redictUrl + "/" + _id +"/"+ resetString}>ici</a>
+          Si vous ne l'avez pas demandé, veuillez ignorer cet e-mail et votre mot de passe restera inchangé.\n'
+            </div>`,
+        
+    };
+    //hash reset string
+    const saltRounds=10;
+    bcrypt
+    .hash(resetString, saltRounds)
+    .then(
+      hashedResetString=>{
+        //set value in password reset 
+        const newPasswordResetString = new PasswordReset({
+          userId:_id,
+          resetString:hashedResetString,
+          createdAt:Date.now(),
+          expiresAt:Date.now()+360000
+        });
+        newPasswordResetString
+        .save()
+        .then(
+          ()=>{
+            transporter
+            .sendMail(sendForgotPassword)
+            .then( 
+              ()=>
+              {
+                //reset email and pass
+                res.json({
+                  status:"PENDING",
+                  message:"pass and reset send",
+                })
+              }
+            )
+            .catch(error=>{
+              console.log(error)
+              res.json({
+                status:"FAILED",
+                message:"error"
+              })
+            })
+          }
+        )
+        .catch(error=>{
+          console.log(error)
+          res.json({
+            status:"FAILED",
+            message:"error"
+          })
+        })
+        
+      }
+    )
+    .catch(error=>{
+      console.log(error);
+      res.json({
+       status:"FAILED",
+       message:"error"
+      });
+    })
+    
+    }
+  )
+  .catch(error=>{
+    console.log(error);
+    res.json({
+      status:"FAILED",
+      message:"can not clear existing records!",
+    });
+   } )
+
+  
+}
+//reset the password
+userRouter.post('/resetpassword',
+expressAsyncHandler(async (req,res)=>
+{
+let{userId,resetString,newPassword}=req.body;
+PasswordReset
+.find({userId})
+.then(
+  result=>{
+    if(result.length > 0){
+         const{expiresAt}=result[0];
+         const hashedResetString =result[0].resetString;
+         //chek for expireRset
+         if( expiresAt <Date.now())
+         {
+          PasswordReset.deleteOne({userId})
+          .then(
+            //delet succuss
+            res.json({
+             status:"FAILED",
+      message:"password reset Not found",
+         })
+          )
+          .catch(
+            error =>{
+             res.json({
+               status:"FAILED",
+        message:"password reset Not found",
+           })
+
+            }
+          )
+         }
+         else{
+           //void reset record existe
+            //compare the hash
+            bcrypt
+            .compare(resetString,hashedResetString)
+            .then(
+              (result)=>{
+                if(result)
+                {
+                  const saltRounds=10;
+                  bcrypt
+                  .hash(newPassword,saltRounds)
+                  .then(hashedNewPassword=>
+                  {
+                    //update pass
+                    User
+                    .updateOne({_id:userId},{password:hashedNewPassword})
+                    .then(()=>{
+                      //update complete
+                      PasswordReset
+                      .deleteOne({userId})
+                      .then(
+                        ()=>{
+                        
+                                res.json({
+                              status:"SUCCESS",
+                              message:"Password changed suuceccfuly",
+                               })
+                          }
+                        
+                      )
+                      .catch(
+                        error=>{
+                          console.log(error);
+                          res.json({
+                            status:"FAILED",
+                            message:"cheking password reset failed",
+                             })
+                        }
+                      )
+
+                    })
+                    .catch(
+                      error=>{
+                        console.log(error);
+                        res.json({
+                          status:"FAILED",
+                          message:"cheking password reset failed",
+                           })
+                      }
+                    )
+                  })
+                  .catch(
+                    error=>{
+                      console.log(error);
+                      res.json({
+                        status:"FAILED",
+                        message:"cheking password reset failed",
+                         })
+                    }
+                  )
+
+                }else{
+                  //record in correct
+                  res.json({
+                    status:"FAILED",
+                    message:"cheking password reset failed",
+                     })
+                }
+
+              }
+            )
+            .catch(error =>{
+              res.json({
+                status:"FAILED",
+                message:"cheking password reset failed",
+                 })
+            })
+          
+         }
+    }else{
+      res.json({
+        status:"FAILED",
+ message:"password reset Not found",
+    })
+    }
+  }
+)
+.catch(error=>{
+  console.log(error);
+  res.json({
+ status:"FAILED",
+ message:"cheking password reset failed",
+  })
+})
+}
+)
+)
+
 export default userRouter;

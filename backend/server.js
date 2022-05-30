@@ -19,10 +19,9 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1/diamelle');
 app.use('/api/users', userRouter);
 app.use('/api/baguestest', baguetestRouter);
 app.use('/api/diamants', diamantRouter);
-
-
 app.use('/api/orders', orderRouter);
 app.use('/api/commandes', commandeRouter);
+
 
 
 const __dirname = path.resolve();

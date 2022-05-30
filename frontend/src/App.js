@@ -37,6 +37,9 @@ import CommandeListScreen from './screens/CommandeListScreen';
 import CommandeHistoryScreen from './screens/CommandeHistoryScreen';
 import DiamantEditScreen from './screens/DiamantEditScreen';
 import DiamantListScreen from './screens/DiamantListScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import SendEmailScreen from './screens/SendEmailScreen';
 
 function App () {
   const userSignin = useSelector((state) => state.userSignin);
@@ -73,6 +76,16 @@ function App () {
             <Route
             path="/diamant/:id/edit"
             element={<DiamantEditScreen/>}
+            exact
+          ></Route>
+          <Route
+            path="/sendemail"
+            element={<SendEmailScreen/>}
+            exact
+          ></Route>
+            <Route
+            path="/forgot/:userId/:resetString"
+            element={<ResetPasswordScreen/>}
             exact
           ></Route>
        <Route path='/signin' element={<SigninScreen/>} exact></Route> 
@@ -135,6 +148,8 @@ function App () {
                 </PrivateRoute>
               }
             />
+            <Route path='/forgot' element={<ForgotPasswordScreen/>}></Route>
+
             <Route
               path="/recommandationhistory"
               element={
@@ -204,7 +219,7 @@ function App () {
             element={<SearchScreen/>}
             exact
           ></Route>
-
+          
            
             <Route
               path="/support"

@@ -6,7 +6,7 @@ import { diamantCreateReducer, diamantDeleteReducer, diamantDetailsReducer, diam
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer } from "./reducers/orderReducers";
 import { commandeCreateReducer, commandeDeleteReducer, commandeDeliverReducer, commandeDetailsReducer, commandeListReducer, commandeMineListReducer } from "./reducers/commandeReducers";
 import { recommandationReducer } from "./reducers/recommandationReducers";
-import { userDeleteReducer, userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userUpdateProfileReducer, userUpdateReducer } from "./reducers/userReducers";
+import { userDeleteReducer, userDetailsReducer, userForgotPasswordReducer, userListReducer, userRegisterReducer, userResetPasswordReducer, userSigninReducer, userUpdatePasswordReducer, userUpdateProfileReducer, userUpdateReducer } from "./reducers/userReducers";
 
 const initialState = {
     userSignin:{
@@ -15,7 +15,12 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('userInfo'))
         : null,
     },
-    
+   user:{
+    userId: localStorage.getItem('userId')
+    ? JSON.parse(localStorage.getItem('userId'))
+    : null,
+   }
+    ,
     cart: {
         cartItems: localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
@@ -48,7 +53,11 @@ const Reducer = combineReducers({
     recommandation:recommandationReducer,
 
     userSignin:userSigninReducer,
+
     userRegister: userRegisterReducer,
+    userForgotPassword: userForgotPasswordReducer,
+    userResetPassword: userResetPasswordReducer,
+    userUpdatePassword: userUpdatePasswordReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     commandeCreate: commandeCreateReducer,

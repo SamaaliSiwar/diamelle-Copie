@@ -6,6 +6,9 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  USER_FORGOTPASSWORD_FAIL,
+  USER_FORGOTPASSWORD_REQUEST,
+  USER_FORGOTPASSWORD_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_REQUEST,
   USER_LIST_SUCCESS,
@@ -16,6 +19,9 @@ import {
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
   USER_SIGNOUT,
+  USER_UPDATEPASS_FAIL,
+  USER_UPDATEPASS_REQUEST,
+  USER_UPDATEPASS_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
@@ -122,6 +128,42 @@ export const updateUser = (user) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: USER_UPDATE_FAIL, payload: message });
+  }
+};
+export const forgotPassword = (email,redicectUrl) => async (dispatch , getState) => {
+  dispatch({ type: USER_FORGOTPASSWORD_REQUEST, payload: { email } });
+  
+  try {
+    const { data } = await Axios.post('/api/users/forget', { email,redicectUrl});
+
+    dispatch({ type: USER_FORGOTPASSWORD_SUCCESS, payload: data });
+
+  } catch (error) {
+    dispatch({
+      type: USER_FORGOTPASSWORD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const updatePassword  = (userId,resetString , newPassword, ConfirmnewPassword) => async (dispatch , getState) => {
+  dispatch({ type:USER_UPDATEPASS_REQUEST, payload: { userId,resetString , newPassword, ConfirmnewPassword } });
+  
+  try {
+    const { data } = await Axios.post('/api/users/resetpassword', { userId,resetString , newPassword, ConfirmnewPassword});
+
+    dispatch({ type:USER_UPDATEPASS_SUCCESS, payload: data });
+
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATEPASS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 };
 export const listUsers = () => async (dispatch, getState) => {

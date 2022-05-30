@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 const commandeSchema= new mongoose.Schema({
           commandeItems: [
         {
-         
           support: { type:String, required: true },
           supportprice: { type: Number, required: true },
           taille: { type: Number, required: true },
-         
           or: { type: String, required: true },
           image: { type: String, required: true },
           price: { type: Number, required: true },
