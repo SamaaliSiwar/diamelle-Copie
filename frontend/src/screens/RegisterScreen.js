@@ -4,6 +4,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { register } from '../actions/userActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
+import "../styles/formulaire.css";
 
 export default function RegisterScreen(props) {
   const navigate = useNavigate();
@@ -34,7 +36,10 @@ export default function RegisterScreen(props) {
     }
   }, [navigate, redirect, userInfo]);
   return (
-    <div>
+    <div className="aboutmain">
+     <header className='head' >
+       <NavBar/>
+               </header>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Create Account</h1>
@@ -83,7 +88,7 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primari" type="submit">
             Register
           </button>
         </div>

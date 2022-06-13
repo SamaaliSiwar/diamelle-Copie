@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation,  useNavigate,  useParams } from "react-router-dom";
 import { addToCart, removeFromCart} from "../actions/cartActions";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
+import "../styles/card.css";
+import "../styles/productpage.css";
+
 
 export default function CartScreen(props)
 {
@@ -37,9 +41,16 @@ const checkoutHandler = () => {
   navigate('/signin?redirect=/shipping');
 };
     return(
-        <div className="row top">
-        <div className="col-2">
-        <h1>Shopping Cart</h1>
+      <>
+      <header className='head' >
+      <NavBar/>
+              </header>
+        
+       <div className="row1">
+        <h1>Shopping Cart</h1><br/>
+        <div className="prow top">
+        <div className="pcol-2">
+        <br/>
         {cartItems.length === 0 ? (
           <MessageBox>
             Cart is empty. <Link to="/">Go Shopping</Link>
@@ -47,7 +58,7 @@ const checkoutHandler = () => {
         ) : (
           <ul>
             {cartItems.map((item) => (<li key={item.baguetest}>
-                <div className="row">
+                <div className="prow">
                   <div>
                     <img
                       src={item.image}
@@ -95,10 +106,10 @@ const checkoutHandler = () => {
           </ul>
         )}
       </div>
-      <div className="col-1">
-        <div className="card card-body">
+      <div className="pcol-1">
+        <div className="pcard pcard-body ccard-body">
           <ul>
-            <li>
+            <li className="cardli">
             {cartItems.choicecarat?(
               <h2>
               Subtotal 
@@ -116,11 +127,11 @@ const checkoutHandler = () => {
                 </h2>
               )}
             </li>
-            <li>
+            <li className="cardli">
               <button
                 type="button"
                 onClick={checkoutHandler}
-                className="primary block"
+                className="primari block"
                 disabled={cartItems.length === 0}
               >
                 Proceed to Checkout
@@ -131,5 +142,8 @@ const checkoutHandler = () => {
         </div>
             </div>
         </div>
+        </div>
+        </>
     );
+
 }

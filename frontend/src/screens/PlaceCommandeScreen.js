@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createdCommande } from "../actions/CommandeActions";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
 import RecommandationSteps from "../componnent/RecommandationSteps";
 import { COMMANDE_CREATE_RESET } from "../constants/commandeconstants";
 export default function PlaceRecommandationScreen(props)
@@ -34,7 +35,10 @@ const dispatch= useDispatch();
 
     };
         return(
-        <div>
+        <div className="aboutmain">
+          <header className='head' >
+      <NavBar/>
+              </header>
 <RecommandationSteps step1 step2 step3 step4></RecommandationSteps>     
        <div className="row top">
        <div className="col-2">

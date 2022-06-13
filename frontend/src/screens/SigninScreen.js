@@ -4,6 +4,9 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { signin } from '../actions/userActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
+import "../styles/formulaire.css";
+
 
 export default function SigninScreen(props) {
   const navigate = useNavigate();
@@ -28,7 +31,13 @@ export default function SigninScreen(props) {
     }
   }, [navigate, redirect, userInfo]);
   return (
-    <div>
+    <>
+      <header>
+        <NavBar/>
+      </header>
+    
+    <div className="aboutmain" >
+    
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Sign In</h1>
@@ -57,7 +66,7 @@ export default function SigninScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primari" type="submit">
             Sign In
           </button>
         </div>
@@ -65,16 +74,17 @@ export default function SigninScreen(props) {
           <label />
           <div>
             
-            <Link to={`/forgot-password`}>Forget password?</Link>
+            <Link to={`/forgot`}>Forget password?</Link>
           </div>
           <div>
             New customer?{' '}
-            <Link to={`/register?redirect=${redirect}`}><button className='primary' >Create your account</button>
+            <Link to={`/register?redirect=${redirect}`}><button className='primari' >Create your account</button>
               
             </Link>
           </div>
         </div>
       </form>
     </div>
+    </>
   );
 }

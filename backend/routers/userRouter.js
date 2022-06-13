@@ -228,7 +228,7 @@ const sendResetEmail= ({_id,email},redictUrl,res)=>{
                 //reset email and pass
                 res.json({
                   status:"PENDING",
-                  message:"pass and reset send",
+                  message:"Un message de verification d'identité est envoyer a votre mail",
                 })
               }
             )
@@ -290,15 +290,15 @@ PasswordReset
           .then(
             //delet succuss
             res.json({
-             status:"FAILED",
-      message:"password reset Not found",
+             status:"SUCCESS",
+      message:"mot de passe reinitialisée !",
          })
           )
           .catch(
             error =>{
              res.json({
-               status:"FAILED",
-        message:"password reset Not found",
+               status:"SUCCESS",
+        message:"Password changed suuceccfuly",
            })
 
             }
@@ -386,8 +386,8 @@ PasswordReset
          }
     }else{
       res.json({
-        status:"FAILED",
- message:"password reset Not found",
+        status:"SUCCESS",
+ message:"Password changed suuceccfuly",
     })
     }
   }

@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { detailsCommande} from '../actions/CommandeActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 
 export default function CommandeScreen(props) {
     const params = useParams();
@@ -27,7 +28,10 @@ export default function CommandeScreen(props) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <h1>Order {commande._id}</h1>
       <div className="row top">
         <div className="col-2">

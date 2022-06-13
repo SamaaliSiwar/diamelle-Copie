@@ -1,8 +1,12 @@
 import React from "react";
+import NavBar from "../componnent/Navbar";
 export default function AboutScreen()
 {
     return(
-        
+        <>
+        <header className='head' >
+        <NavBar/>
+                </header>
         <div className="aboutmain">
         <table>
             <tr>
@@ -56,5 +60,6 @@ Le tout imaginé et réalisé par la maison Jarraya avec des créations uniques 
        
        
 </div>
+</>
 );
 }

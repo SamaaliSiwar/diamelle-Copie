@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { savePaymentRecommandation } from "../actions/recommandationActions";
+import NavBar from "../componnent/Navbar";
 import RecommandationSteps from "../componnent/RecommandationSteps";
 export default function PaymentRecommandationScreen(props){
     const recommandation = useSelector((state) => state.recommandation);
@@ -28,7 +29,10 @@ export default function PaymentRecommandationScreen(props){
     }
     return(
       
-        <div>
+        <div className="aboutmain">
+          <header className='head' >
+      <NavBar/>
+              </header>
         <RecommandationSteps step1 step2 step3>
         </RecommandationSteps>
         <form className="form" onSubmit={submitHandler}>

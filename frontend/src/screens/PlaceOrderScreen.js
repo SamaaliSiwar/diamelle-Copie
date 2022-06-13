@@ -6,6 +6,7 @@ import CheckoutSteps from "../componnent/CheckoutSteps";
 import { ORDER_CREATE_RESET } from "../constants/orderconstants";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
 export default function PlaceOrderScreen(props)
 {
  const cart=useSelector((state)=>state.cart);
@@ -42,7 +43,10 @@ const navigate=useNavigate();
   }, [dispatch, order, navigate, success]);
   
         return(
-        <div>
+        <div className="aboutmain">
+          <header className='head' >
+      <NavBar/>
+              </header>
 <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>     
        <div className="row top">
        <div className="col-2">

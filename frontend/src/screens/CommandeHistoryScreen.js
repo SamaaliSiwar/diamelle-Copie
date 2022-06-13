@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { listCommandeMine } from '../actions/CommandeActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 export default function CommandeHistoryScreen()
 {
     const commandeMineList = useSelector((state) => state.commandeMineList);
@@ -14,7 +15,10 @@ export default function CommandeHistoryScreen()
       dispatch(listCommandeMine());
     }, [dispatch]);
     return(
-      <div>
+      <div className="aboutmain">
+        <header className='head' >
+      <NavBar/>
+              </header>
           <h1>Recommandation History</h1>
           {loading ? (
         <LoadingBox></LoadingBox>

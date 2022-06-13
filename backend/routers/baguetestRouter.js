@@ -23,10 +23,6 @@ baguetestRouter.get(
     : order === 'toprated'
     ? { rating: -1 }
     : { _id: -1 };
-    const count =  await Baguetest.count({
-       ...nameFilter,
-       ...categorieFilter,
-      })
       const baguestest = await Baguetest.find({
         ...nameFilter,
         ...categorieFilter,

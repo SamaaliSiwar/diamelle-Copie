@@ -1,24 +1,37 @@
 import  axios from 'axios';
-import { DIAMANT_CREATE_FAIL, DIAMANT_CREATE_REQUEST, DIAMANT_CREATE_SUCCESS, DIAMANT_DELETE_FAIL, DIAMANT_DELETE_REQUEST, DIAMANT_DELETE_SUCCESS, DIAMANT_DETAILS_FAIL, DIAMANT_DETAILS_REQUEST, DIAMANT_DETAILS_SUCCESS, DIAMANT_LISTE_FAIL, DIAMANT_LISTE_REQUEST, DIAMANT_LISTE_SUCCESS, DIAMANT_UPDATE_FAIL, DIAMANT_UPDATE_REQUEST, DIAMANT_UPDATE_SUCCESS } from '../constants/diamantconstants ';
+import { DIAMANTS_SHAPE_LIST_FAIL, DIAMANTS_SHAPE_LIST_REQUEST, DIAMANTS_SHAPE_LIST_SUCCESS, DIAMANT_CREATE_FAIL, DIAMANT_CREATE_REQUEST, DIAMANT_CREATE_SUCCESS, DIAMANT_DELETE_FAIL, DIAMANT_DELETE_REQUEST, DIAMANT_DELETE_SUCCESS, DIAMANT_DETAILS_FAIL, DIAMANT_DETAILS_REQUEST, DIAMANT_DETAILS_SUCCESS, DIAMANT_LISTE_FAIL, DIAMANT_LISTE_REQUEST, DIAMANT_LISTE_SUCCESS, DIAMANT_UPDATE_FAIL, DIAMANT_UPDATE_REQUEST, DIAMANT_UPDATE_SUCCESS } from '../constants/diamantconstants ';
 
 
-   export const ListeDiamants = ({  
-    
-     }) => async (
-    dispatch
-  ) => {
-    dispatch({
-      type: DIAMANT_LISTE_REQUEST,
-    });
-    try {
-      const { data } = await axios.get(
-        `/api/diamants`
-      );
-      dispatch({ type: DIAMANT_LISTE_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({ type: DIAMANT_LISTE_FAIL, payload: error.message });
-    }
-  };
+export const ListeDiamants = ({  
+  shape = '',
+  order = '',
+}) => async (
+dispatch
+) => {
+dispatch({
+ type: DIAMANT_LISTE_REQUEST,
+});
+try {
+ const { data } = await axios.get(
+   `/api/diamants?shape=${shape}&order=${order}`
+ );
+ dispatch({ type: DIAMANT_LISTE_SUCCESS, payload: data });
+} catch (error) {
+ dispatch({ type: DIAMANT_LISTE_FAIL, payload: error.message });
+}
+};
+
+export const listDiamantShape = () => async (dispatch) => {
+  dispatch({
+    type: DIAMANTS_SHAPE_LIST_REQUEST,
+  });
+  try {
+    const { data } = await axios.get(`/api/diamants/shapes`);
+    dispatch({ type: DIAMANTS_SHAPE_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: DIAMANTS_SHAPE_LIST_FAIL, payload: error.message });
+  }
+};
   
   export const detailsDiamant = (diamantId) => async (dispatch) => {
   dispatch({ type: DIAMANT_DETAILS_REQUEST, payload: diamantId });

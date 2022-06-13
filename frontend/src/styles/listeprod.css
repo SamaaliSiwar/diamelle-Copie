@@ -1,0 +1,95 @@
+
+
+#products{
+    width: 75%;
+    padding-left: 30px;
+    margin: 0;
+    float: right;
+}
+.card{
+    margin-right: 55px;
+    margin-left: 55px;
+}
+.card:hover{
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+.card-body{
+    padding: 0.5rem;
+}
+.card-body .description{
+    font-size: 0.78rem;
+    padding-bottom: 8px;
+}
+div.h6,h6{
+    margin: 0;
+}
+.product .fa-star{
+    font-size: 0.9rem;
+}
+.rebate{
+    font-size: 0.9rem   ;
+}
+.btn.btn-primary{
+    background-color:#c29958;
+    color: #fff;
+    border: 1px solid;    
+    border-radius: 10px;
+    font-weight: 800;
+}
+
+
+
+.clear{
+    clear: both;
+}
+.btn.btn-success{
+    visibility: hidden;
+}
+@media(min-width:992px){
+    .filter,#mobile-filter{
+        display: none;
+    }
+}
+@media(min-width:768px) and (max-width:991px){
+    .radio, .checkbox {
+        padding: 6px 10px;
+        width: 49%;
+        float: left;
+        margin: 5px 5px 5px 0px;
+    }
+    .filter,#mobile-filter{
+        display: none;
+    }
+}
+@media(min-width:576px) and (max-width:767px){
+    
+    
+    #products{
+        width: 65%;
+    }
+    .filter,#mobile-filter{
+        display: none;
+    }
+    .h3 + .ml-auto{
+        margin: 0;
+    }
+}
+
+.pt-lg-4{
+    display: inline-block;
+}
+img, svg {
+    vertical-align: middle;
+}
+
+.d-none ,
+.d-md-block
+{
+height: 70px;
+width: 190px;
+}
+.btn .btn-primary
+{
+background-color: #c29958;}

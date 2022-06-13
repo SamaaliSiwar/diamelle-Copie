@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { detailsBaguetest, updatedBaguetest } from "../actions/baguetestActions";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
 export default function BaguetestEditScreen(props)
 {
 const params=useParams();
@@ -100,7 +101,10 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
     }
   };
   return (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit Product {baguetestId}</h1>

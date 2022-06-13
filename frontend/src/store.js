@@ -2,7 +2,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import thunk from "redux-thunk";
 import {baguetestListReducer,  baguetestDetailsReducer, baguetestCreateReducer, baguetestUpdateReducer, baguetestDeleteReducer, baguetestCategorieListReducer, baguetestReviewCreateReducer} from './reducers/baguetestReducers';
 import {  cartReducer } from "./reducers/cartReducers";
-import { diamantCreateReducer, diamantDeleteReducer, diamantDetailsReducer, diamantListReducer, diamantUpdateReducer } from "./reducers/diamantReducers";
+import { diamantCreateReducer, diamantDeleteReducer, diamantDetailsReducer, diamantListReducer, DiamantShapeListReducer, diamantUpdateReducer } from "./reducers/diamantReducers";
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer } from "./reducers/orderReducers";
 import { commandeCreateReducer, commandeDeleteReducer, commandeDeliverReducer, commandeDetailsReducer, commandeListReducer, commandeMineListReducer } from "./reducers/commandeReducers";
 import { recommandationReducer } from "./reducers/recommandationReducers";
@@ -85,6 +85,8 @@ const Reducer = combineReducers({
     userDelete: userDeleteReducer,
     baguetestCategorieList: baguetestCategorieListReducer,
     baguetestReviewCreate: baguetestReviewCreateReducer,
+    diamantShapeList:DiamantShapeListReducer,
+
 
 });
 

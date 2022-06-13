@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { forgotPassword, signin } from '../actions/userActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 import { USER_FORGOTPASSWORD_SUCCESS } from '../constants/userconstants';
 
 export default function ForgotPasswordScreen(props) {
@@ -31,12 +32,18 @@ const navigate = useNavigate();
   
   
   return (
-    <div>
+    <>
+        <header className='head' >
+      <NavBar/>
+              </header>
+  
+    <div className="aboutmain">
       <form className="form" onSubmit={submitHandler} initialvalues={{
         email:email,
         redicectUrl:"http://localhost:3000/forgot "
       }}>
         <div>
+      
           <h1>Reset Password</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
@@ -52,13 +59,14 @@ const navigate = useNavigate();
           ></input>
           <div>
           <label />
-          <button className="primary" type="submit">
-            submit
+          <button  type="submit">
+            Chercher
           </button>
         </div>
         </div>
         
       </form>
     </div>
+    </>
   );
 }

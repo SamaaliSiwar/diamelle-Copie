@@ -1,0 +1,94 @@
+.col-text {
+    height:20em;
+  }
+  .grid-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    flex-direction: row; 
+    -webkit-flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -webkit-justify-content: space-around;
+  }
+  .col {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  .col-left {
+    -webkit-box-ordinal-group:-1;
+    -webkit-order: -1;
+    -ms-flex-order: -1;
+    order: -1;
+  }
+  .col-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Aligner-item {
+    width: 60%;
+  }
+  .col-image {
+    background-size: cover;
+    background-position:center center;
+    background-image: url(../diamant_ethique.jpg);
+    width: 600px;
+    height: 508px;
+  }
+  .col-image2 {
+    background-size: cover;
+    background-position:center center;
+    background-image: url(../montreg1.jpg);
+    width: 600px;
+    height: 508px;
+  }
+  .espacey:after {
+    content: "\f178";
+    font-family: "FontAwesome";
+}
+  
+  @media (max-width: 640px) {
+    .grid-flex {
+      height: 40em;
+      display: -webkit-flex;
+      -webkit-flex-direction: column;
+      flex-direction: column; 
+     }
+    .col {
+      order:vertical;
+    }
+    .col-left {
+      -webkit-box-ordinal-group:0;
+      -webkit-order: 0;
+      -ms-flex-order: 0;
+      order: 0;
+    }
+    .col-text div p {
+      padding: 1em;
+    }
+    .Aligner-item {
+      width: 90%;
+    }
+  }
+  /** */
+  .espacey {
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    display: block;
+    margin: 5rem 0 0 0;
+}
+.dorey {
+    color: #D6BB71 !important;
+    transition: all 0.3s;
+}
+.ob {
+    cursor: pointer;
+}

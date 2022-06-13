@@ -1,0 +1,26 @@
+.ccard {
+    border: 0.1rem #c0c0c0 solid;
+    background-color: #f8f8f8;
+    border-radius: 0.5rem;
+    margin: 1rem;
+  }
+  .ccard-body {
+    padding: 1rem;
+    margin-left: 361px;
+
+  }
+  .ccard-body > * {
+    margin-bottom: 0.5rem;
+  }
+  .cprice {
+    font-size: 2rem;
+  }
+  h1{
+      text-align: center;
+  }
+  .row1{
+      background-color: white;
+  }
+  .cardli {
+    display: table-row;
+}

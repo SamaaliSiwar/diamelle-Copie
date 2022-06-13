@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation,  useNavigate,  useParams } from "react-router-dom";
 import { addToRecommandation, removeFromrecommandation } from "../actions/recommandationActions";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
 
 export default function RecommandationScreen(props)
 {
@@ -38,6 +39,10 @@ const checkoutHandler = () => {
   navigate('/signin?redirect=/laivraison');
 };
     return(
+      <>
+      <header className='head' >
+      <NavBar/>
+              </header>
         <div className="row top">
         <div className="col-2">
         <h1> recommandation</h1>
@@ -124,5 +129,6 @@ const checkoutHandler = () => {
         </div>
             </div>
         </div>
+        </>
     );
 }

@@ -1,0 +1,47 @@
+.css-cd0a98 {
+margin-left: 183.125px;
+margin-right: 183.125px;
+margin-top: 15px;
+display: inline-block;}
+.css-1xi4blx {
+display: inline-block;
+width: 115px;
+}
+.css-3dvuxu {
+text-align: center;
+font-weight: bold;
+}
+.css-rex2z0 {
+width: 50px;
+}
+
+.css-q7y8co {
+width: 55px;
+color: #313131;
+}
+
+.css-zf4890 {
+background-color:white;
+padding-top: 1px;
+padding-bottom: 1px;
+margin-bottom: 35px;
+}
+
+@media screen and (max-width: 1004px) {
+.specialMontre {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  opacity: 1;
+  visibility: inherit;
+}
+}
+.d-flex 
+.justify-content-center
+ .align-items-center
+  .h-100{
+  width: 1682px;
+height: 400px;
+
+}

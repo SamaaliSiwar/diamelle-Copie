@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../actions/cartActions";
 import CheckoutSteps from "../componnent/CheckoutSteps";
+import NavBar from "../componnent/Navbar";
 export default function PaymentMethodScreen(props){
     const cart = useSelector((state) => state.cart);
     const { shippingAddress } = cart;
@@ -28,7 +29,10 @@ export default function PaymentMethodScreen(props){
     }
     return(
       
-        <div>
+        <div className="aboutmain">
+          <header className='head' >
+      <NavBar/>
+              </header>
         <CheckoutSteps step1 step2 step3>
         </CheckoutSteps>
         <form className="form" onSubmit={submitHandler}>

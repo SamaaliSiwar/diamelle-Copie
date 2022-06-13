@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from '../componnent/CheckoutSteps';
+import NavBar from '../componnent/Navbar';
 
 export default function ShippingAddressScreen(props) {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function ShippingAddressScreen(props) {
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [country, setCountry] = useState(shippingAddress.country);
+  const [numtel, setNumtel] = useState(shippingAddress.numtel);
   if (!userInfo) {
     navigate('/signin');
   }
@@ -25,17 +26,21 @@ export default function ShippingAddressScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveShippingAddress({ fullName, address, city, postalCode, country })
+      saveShippingAddress({ fullName, address, city, postalCode, numtel })
     );
     navigate('/payment');
   };
   return (
-    <div>
+    <div className="aboutmain">
+     <header className='head' >
+       <NavBar/>
+               </header>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>
         </div>
+        
         <div>
           <label htmlFor="fullName">Full Name</label>
           <input
@@ -81,13 +86,13 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="country">Country</label>
+          <label htmlFor="numtel">Tel:</label>
           <input
             type="text"
-            id="country"
-            placeholder="Enter country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            id="numtel"
+            placeholder="Enter Your phone number"
+            value={numtel}
+            onChange={(e) => setNumtel(e.target.value)}
             required
           ></input>
         </div>

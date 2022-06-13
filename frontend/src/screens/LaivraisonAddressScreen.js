@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveLaivraisonAddress } from '../actions/recommandationActions';
+import NavBar from '../componnent/Navbar';
 import RecommandationSteps from '../componnent/RecommandationSteps';
 
 export default function LaivraisonAddressScreen(props) {
@@ -30,7 +31,10 @@ export default function LaivraisonAddressScreen(props) {
     navigate('/paymentrecommandation');
   };
   return (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <RecommandationSteps step1 step2></RecommandationSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>

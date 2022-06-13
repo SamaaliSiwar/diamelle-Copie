@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteOrder, listOrders } from '../actions/orderActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 import { ORDER_DELETE_RESET } from '../constants/orderconstants';
 
 export default function OrderListScreen(props) {
@@ -29,7 +30,10 @@ export default function OrderListScreen(props) {
       }
   };
   return (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <h1>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}

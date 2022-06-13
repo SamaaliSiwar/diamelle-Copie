@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { detailsDiamant, updatedDiamant } from "../actions/diamantActions";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
 export default function DiamantEditScreen(props)
 {
 const params=useParams();
@@ -93,7 +94,10 @@ const diamantDetails = useSelector((state) => state.diamantDetails);
     }
   };
   return (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Edit Product {diamantId}</h1>

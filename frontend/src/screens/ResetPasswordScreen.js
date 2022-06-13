@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { updatePassword } from "../actions/userActions";
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from "../componnent/Navbar";
 
 export default function ReserPasswordScreen()
 {
@@ -20,7 +21,10 @@ export default function ReserPasswordScreen()
     dispatch(updatePassword(userId,resetString , newPassword, ConfirmnewPassword));
   };
   return(
-  <div>
+  <div className="aboutmain">
+   <header className='head' >
+       <NavBar/>
+               </header>
 {resetString && userId &&(
   <form className="form" onSubmit={submitHandler}>
         <div>
@@ -50,7 +54,7 @@ export default function ReserPasswordScreen()
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primari" type="submit">
             submit
           </button>
         </div>

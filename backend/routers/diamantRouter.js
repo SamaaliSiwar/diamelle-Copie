@@ -1,5 +1,4 @@
 import express from 'express';
-import data from '../data.js';
 import expressAsyncHandler from 'express-async-handler';
 import Diamant from '../models/diamantModel.js';
 import { isAdmin, isAuth } from '../util.js';
@@ -7,49 +6,43 @@ const diamantRouter = express.Router();
 diamantRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const diamants = await Diamant.find({});
+    const shape = req.query.shape || '';
+    const order = req.query.order || '';
+
+    const shapeFilter = shape ? { shape } : {};
+    const sortOrder =
+    order === 'lowest'
+    ? { price: 1 }
+    : order === 'highest'
+    ? { price: -1 }
+    : order === 'toprated'
+    ? { rating: -1 }
+    : { _id: -1 };
+    const diamants = await Diamant.find({
+      ...shapeFilter,
+    }).sort(sortOrder);
     res.send(diamants);
   })
 );
 diamantRouter.get(
-    '/seed',
-    expressAsyncHandler(async (req, res) => {
-    //await Diamant.remove({});
-      const createdDiamants = await Diamant.insertMany(data.diamants);
-      res.send({ createdDiamants });
-    })
-  );
-  //get by id details api
-  diamantRouter.get(
-    '/:id',
-    expressAsyncHandler(async (req, res) => {
-      const diamant = await Diamant.findById(req.params.id);
-      if (diamant) {
-        res.send(diamant);
-      } else {
-        res.status(404).send({ message: 'Product Not Found' });
-      }
-    })
-  );
-  diamantRouter.post(
-    '/',
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-      const diamant = new Diamant({
-        shape: 'sample shape ' + Date.now(),
-        image: '/images/diamants/round.jpg',
-        price: 0,
-        cut: 'sample cut',
-        couleur: 'couleur',
-        clarity: 'clarity',
-        carat: '0.5',
-        countInStock: 0,
-      });
-      const createdDiamants = await diamant.save();
-      res.send({ message: 'Product Created', diamant: createdDiamants });
-    })
-  );
+  '/shapes',
+  expressAsyncHandler(async (req, res) => {
+    const shapes = await Diamant.find().distinct('shape');
+    res.send(shapes);
+  })
+);
+  
+diamantRouter.get(
+  '/:id',
+  expressAsyncHandler(async (req, res) => {
+    const diamant = await Diamant.findById(req.params.id);
+    if (diamant) {
+      res.send(diamant);
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+  })
+);
   diamantRouter.put(
     '/:id',
     isAuth,
@@ -68,12 +61,13 @@ diamantRouter.get(
         diamant.carat= req.body.carat;
 
         const updatedDiamant = await diamant.save();
-        res.send({ message: 'Product Updated', baguetest: updatedDiamant});
+        res.send({ message: 'Product Updated', diamants: updatedDiamant});
       } else {
         res.status(404).send({ message: 'Product Not Found' });
       }
     })
   );
+ 
   diamantRouter.delete(
     '/:id',
     isAuth,

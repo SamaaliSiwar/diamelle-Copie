@@ -1,23 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import NavBar from '../componnent/Navbar';
+;
 
 
 export default function SendEmailScreen(props) {
  
-    const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo, loading, error } = userSignin;
+  
   return (
-    <div>
-    
-        <div>
-          <h1>Maile envoyer</h1>
-        </div>
-        
-        <div>
-         <p>
-             un mail est envoyer a votre aadress
-         </p>
-        </div>
+    <div className="aboutmain">
+     <header className='head' >
+       <NavBar/>
+               </header>
+    <div className='row-top'>
+    <h1>Un mail est envoyer a votre compte</h1>
+    </div>
       
     </div>
   );

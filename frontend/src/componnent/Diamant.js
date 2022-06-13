@@ -6,18 +6,15 @@ export default function Diamant(props){
     const{diamant}=props;
     return(
         <>
-        <div className="col-3">
-       
-       <div className="row center">
-                
+              {diamant && diamant.map((diamant) => (
                   <div key={diamant._id} className="card">
       <Link to={`/diamant/${diamant._id}`}>
-        <img className="medium" src={diamant.image}  />
+        <img className="medium" src={diamant.image} />
       </Link>
       <div className="card-body">
         
-       
-        <h2>Diamant : {diamant.carat}ct - {diamant.shape}</h2>
+          <h2>{diamant.shape}</h2>
+        
         
         <div className="row">
           <div className="price">{diamant.price}dt</div>
@@ -25,9 +22,7 @@ export default function Diamant(props){
         </div>
       </div>
     </div>
-          
-              </div>
-              </div>
+                ))}
               </>
               
        

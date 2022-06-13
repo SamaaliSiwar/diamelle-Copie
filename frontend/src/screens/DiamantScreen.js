@@ -5,8 +5,8 @@ import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
 import { detailsDiamant } from "../actions/diamantActions";
 import Zoom from "react-img-zoom";
-
-
+import NavBar from "../componnent/Navbar";
+import "../styles/productpage.css";
 export default function DiamantScreen(props)
 { 
   const supportimage={
@@ -39,7 +39,10 @@ export default function DiamantScreen(props)
         };
         
     return(
-        <div>
+        <div className="aboutmain">
+        <header>
+          <NavBar/>
+        </header>
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -47,8 +50,8 @@ export default function DiamantScreen(props)
         ) : (
           <div>
            
-            <div className="row top">
-              <div className="col-2">
+            <div className="prow top">
+              <div className="pcol-2">
             
               <Zoom
                zoomScale={3}
@@ -59,11 +62,9 @@ export default function DiamantScreen(props)
                   />
                      </div>
       
-              <div className="col-1">
+              <div className="pcol-1">
               
-                <ul>
-                  
-                  <li>
+                
                   <p className="discrip"><h2>
                    {diamant.carat} - carat- Diamant:</h2>avec une piere {diamant.shape}<br/>
                     {diamant.cut} cut ||{diamant.clarity} clarity ||{diamant.carat} ct || {diamant.color} couleur<br/>
@@ -71,10 +72,10 @@ export default function DiamantScreen(props)
                     <br/>
                     <h2>Crée vos unique bijoux avec diamelle</h2>
                     
-                  </li><br/>
+                  <br/>
                 
                  
-                  <li>
+                  
                   <div>
                                   <form >
                                   <strong>Selectionner le support</strong>
@@ -102,8 +103,7 @@ export default function DiamantScreen(props)
                                         
                                  
       
-                      </li>
-                      <li>
+                      
                       <div>
                                   <form>
                                   <strong>sellectionner le Taille</strong>
@@ -114,12 +114,11 @@ C'est également la valeur de votre tour de doigt.Donc si votre tour de doigt st
                              <input type="text" id="op-on" name="selector"  onChange={e=>setTaille(e.target.value)}/>
                     </form>
                    </div>
-                      </li>
-                      <li>
+                   
               
               <div>
               <form>
-              <strong>Selectionner l'or</strong>
+              <strong>Selectionner l'or</strong><br/>
               <div class="radio-group " id="radiogroup2">
          <input type="radio" id="one" name="selector" value="orBlanc" onChange={e=>setOr(e.target.value)}/>
        <label for="one">
@@ -136,27 +135,26 @@ C'est également la valeur de votre tour de doigt.Donc si votre tour de doigt st
                     
              </div>
 
-  </li>
+  
 
 
                   
                 
                  
-                </ul>
               </div>
              
 
-              <div className="col-1">
-                <div className="card card-body">
+              <div className="pcol-1">
+                <div className="pcard pcard-body">
                   <ul>
                     <li>
-                      <div className="row">
+                      <div className="prow">
                         <div className="discrip">Prix :  </div>
                         <div ><p className="price"> {diamant.price+supportprice}dt</p></div>
                       </div>
                     </li><br/>
                     <li>
-                      <div className="row">
+                      <div className="prow">
                         <div><p>Status: </p></div>
                         <div>
                           {diamant.countInStock > 0 ? (

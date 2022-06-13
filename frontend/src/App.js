@@ -23,8 +23,7 @@ import UserEditScreen from './screens/UserEditScreen';
 import SearchScreen from './screens/SearchScreen';
 import SupportScreen from './screens/SupportScreen';
 import { useSelector } from 'react-redux';
-import ChatBox from './componnent/ChatBox';
-import alanBtn from '@alan-ai/alan-sdk-web';
+
 import Support from './screens/SupportScreen';
 import DiamantScreen from './screens/DiamantScreen';
 import RecommandationScreen from './screens/RecommandationScreen';
@@ -40,6 +39,8 @@ import DiamantListScreen from './screens/DiamantListScreen';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import SendEmailScreen from './screens/SendEmailScreen';
+import Footer from './componnent/Footer';
+import { black } from 'color-name';
 
 function App () {
   const userSignin = useSelector((state) => state.userSignin);
@@ -49,12 +50,7 @@ function App () {
     <BrowserRouter>
     <div class="grid-container">
      
-      
-    <header >
-    <Navbar></Navbar>
-               </header>
-
-    
+   
         <main>
         <Routes>
         <Route path="/cart" element={<CartScreen/>}></Route>
@@ -88,7 +84,8 @@ function App () {
             element={<ResetPasswordScreen/>}
             exact
           ></Route>
-       <Route path='/signin' element={<SigninScreen/>} exact></Route> 
+                 <Route path='/signin' element={<SigninScreen/>} exact ></Route> 
+
        <Route path='/register' element={<RegisterScreen/>}></Route> 
        <Route path="/shipping" 
        element={
@@ -221,6 +218,33 @@ function App () {
           ></Route>
           
            
+           <Route
+            path="/seachdiamant/shape/:shape"
+            element={<AlldiamantScreen/>}
+            exact
+          ></Route>
+            <Route
+            path="/searchdiamant/shape/:shape/order/:order"
+            element={<AlldiamantScreen/>}
+            exact
+          ></Route>
+           <Route
+              path="/searchdiamant/shape/:shape/min/:min/max/:max/order/:order/pageNumber/:pageNumber"
+              element={<AlldiamantScreen />}
+              exact
+            ></Route>
+          <Route
+            path="/diamants"
+            element={<AlldiamantScreen/>}
+            exact
+          ></Route>
+          <Route
+            path="/seachdiamant/shape/:shape/order/:order"
+            element={<AlldiamantScreen/>}
+            exact
+          ></Route>
+          
+           
             <Route
               path="/support"
               element={
@@ -238,13 +262,13 @@ function App () {
               }
             />
              </Routes>
-     
+             <Support />
         </main>
-        <Support />
-        <footer className="row center">
+       
+        <Footer className="row center" style="background-color: black;">
           
           <div>All right reserved</div>{' '}
-        </footer>
+        </Footer>
       
       </div>
       </BrowserRouter>

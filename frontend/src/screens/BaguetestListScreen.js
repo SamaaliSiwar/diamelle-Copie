@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { createBaguetest, deleteBaguetest, ListeBaguestest } from '../actions/baguetestActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 import { BAGUETEST_CREATE_RESET, BAGUETEST_DELETE_RESET } from '../constants/baguetestconstants';
 
 export default function BaguetestListScreen(props) {
@@ -67,7 +68,10 @@ export default function BaguetestListScreen(props) {
 
   };
   return (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <div className="row">
         <h1>Products</h1>
       

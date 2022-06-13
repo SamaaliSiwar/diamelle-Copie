@@ -12,7 +12,10 @@ export default function SearchBox() {
     <form className="search" onSubmit={submitHandler}>
       <div >
         <input
-          type="text"
+            className="form-control border-end-0 border-start-0 border-bottom-0 border-top-0"
+                  type="search"
+                  placeholder="Chercher"
+  
           name="q"
           id="q"
           onChange={(e) => setName(e.target.value)}

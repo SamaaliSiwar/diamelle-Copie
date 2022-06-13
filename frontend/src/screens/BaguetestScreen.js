@@ -6,7 +6,10 @@ import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
 import Rating from "../componnent/Rating";
 import Zoom from 'react-img-zoom'
+import "../styles/productpage.css";
+
 import { BAGUETEST_REVIEW_CREATE_RESET } from "../constants/baguetestconstants";
+import NavBar from "../componnent/Navbar";
 
 
 export default function BaguetestScreen(props)
@@ -59,7 +62,10 @@ export default function BaguetestScreen(props)
         };
       
     return(
-        <div>
+        <div className="aboutmain">
+          <header className='head' >
+      <NavBar/>
+              </header>
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -67,8 +73,8 @@ export default function BaguetestScreen(props)
         ) : (
           <div>
            
-            <div className="row top">
-              <div className="col-2">
+            <div className="prow" >
+              <div className="pcol-2">
               <Zoom
              img={baguetest.image}
                zoomScale={2}
@@ -79,7 +85,7 @@ export default function BaguetestScreen(props)
                     
                 
               </div>
-              <div className="col-1">
+              <div className="pcol-1">
               
                 <ul>
                   <li>
@@ -98,7 +104,8 @@ export default function BaguetestScreen(props)
                                   
                                   <div>
                                   <form>
-                                  { baguetest.simpleproduct= false && 
+                                  { baguetest.simpleproduct===false &&
+                               
                                   <div>
                                   <strong>Selectionner l'or</strong>
                                   <div class="radio-group " id="radiogroup2">
@@ -149,11 +156,11 @@ export default function BaguetestScreen(props)
                  
                 </ul>
               </div>
-              <div className="col-1">
-                <div className="card card-body">
+              <div className="pcol-1">
+                <div className="pcard pcard-body">
                   <ul>
                     <li>
-                      <div className="row">
+                      <div className="prow">
                         <div className="discrip">Prix :  </div>
                         {baguetest.choicecarat? (
                         <div ><p className="price"> {baguetest.masse*127+ carat*baguetest.nbrpiere*2200}dt</p></div>
@@ -163,7 +170,7 @@ export default function BaguetestScreen(props)
                       </div>
                     </li><br/>
                     <li>
-                      <div className="row">
+                      <div className="prow">
                         <div><p>Status: </p></div>
                         <div>
                           {baguetest.countInStock > 0 ? (
@@ -180,7 +187,7 @@ export default function BaguetestScreen(props)
                       
                       <>
                       <li>
-                        <div className="row">
+                        <div className="prow">
                           <div>
                             <select value={qty} onChange={e=>setQty(e.target.value)}>
                               {
@@ -211,7 +218,7 @@ export default function BaguetestScreen(props)
                     </div>
                     </div><br/>
 
-                    <div> 
+                    <div className="pcol-3"> 
             <h2 id="reviews">Reviews</h2>
             {baguetest.reviews.length === 0 && (
               <MessageBox>There is no review</MessageBox>

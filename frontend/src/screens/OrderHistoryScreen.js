@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { listOrderMine } from '../actions/orderActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 export default function OrderHistoryScreen()
 {
     const orderMineList = useSelector((state) => state.orderMineList);
@@ -14,7 +15,10 @@ export default function OrderHistoryScreen()
       dispatch(listOrderMine());
     }, [dispatch]);
     return(
-      <div>
+      <div className="aboutmain">
+        <header className='head' >
+      <NavBar/>
+              </header>
           <h1>Order History</h1>
           {loading ? (
         <LoadingBox></LoadingBox>

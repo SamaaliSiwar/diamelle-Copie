@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
 import { signout } from "../actions/userActions";
+import { AiOutlineUser } from "react-icons/ai";
+import "../styles/singin.css";
 
 export default function Singin()
 {
@@ -17,29 +19,30 @@ export default function Singin()
      <div className="grid-container">
      
     {userInfo ? (
-              <div className="dropdown">
+      <div className="dropdown" >
                 <Link to="#">
                   {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                 </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">User Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderhistory">Order History</Link>
-                  </li>
-                  <li>
-                    <Link to="/recommandationhistory">mes recommandations</Link>
-                  </li>
-                  <li>
+                <div className="dropdown-content">
+                 
+                    <Link to="/profile">User Profile</Link><br/>
+                  
+                  
+                    <Link to="/orderhistory">Order History</Link><br/>
+                  
+                    <Link to="/recommandationhistory">recommandations</Link><br/>
+                 
                     <Link to="#signout" onClick={signoutHandler}>
                       Sign Out
-                    </Link>
-                  </li>
-                </ul>
+                    </Link><br/>
+                    </div>
+                
               </div>
             ) : (
-              <Link to="/signin">Sign In</Link>
+              <Link to="/signin">
+              <AiOutlineUser size="20" color="#C29958" > Sign In</AiOutlineUser>
+              </Link>
+             
             )}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">

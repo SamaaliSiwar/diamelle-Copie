@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { detailsUser, updateUserProfile } from "../actions/userActions";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
+import NavBar from "../componnent/Navbar";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userconstants";
 export default function ProfileScreen()
 { 
@@ -40,7 +41,10 @@ export default function ProfileScreen()
           }
       };
     return(
-        <div>
+        <div className="aboutmain">
+          <header className='head' >
+      <NavBar/>
+              </header>
          <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Profile utilisateur</h1>
@@ -101,7 +105,7 @@ export default function ProfileScreen()
             </div>
             <div>
               <label />
-              <button className="primary" type="submit">
+              <button className="primari" type="submit">
                 Mettre A Jour
               </button>
             </div>

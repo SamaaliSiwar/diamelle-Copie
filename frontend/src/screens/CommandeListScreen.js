@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteCommande, listCommandes } from '../actions/CommandeActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
+import NavBar from '../componnent/Navbar';
 import { COMMANDE_DELETE_RESET } from '../constants/commandeconstants';
 
 
@@ -30,7 +31,10 @@ export default function CommandeListScreen(props) {
       }
   };
   return (
-    <div>
+    <div className="aboutmain">
+      <header className='head' >
+      <NavBar/>
+              </header>
       <h1>Recommandations</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
