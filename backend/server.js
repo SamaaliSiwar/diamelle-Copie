@@ -16,7 +16,7 @@ app.use('/api/uploads', uploadRouter);
 
 app.use(express.urlencoded({extended: true}));
 mongoose
-  .connect(process.env.MONGODB_LOCAL_URI)
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('connected to db');
   })
