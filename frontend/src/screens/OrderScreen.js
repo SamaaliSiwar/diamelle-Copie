@@ -5,6 +5,9 @@ import { detailsOrder } from '../actions/orderActions';
 import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
 import NavBar from '../componnent/Navbar';
+import "../styles/order.css";
+import { Col, Divider, Row, Table } from 'antd';
+import 'antd/dist/antd.css';
 
 export default function OrderScreen(props) {
     const params = useParams();
@@ -32,103 +35,148 @@ export default function OrderScreen(props) {
       <header className='head' >
       <NavBar/>
               </header>
-      <h1>Order {order._id}</h1>
-      <div className="row top">
-        <div className="col-2">
-          <ul>
-            <li>
-              <div className="card card-body">
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {order.shippingAddress.address},
-                  {order.shippingAddress.city},{' '}
-                  {order.shippingAddress.postalCode},
-                  {order.shippingAddress.country}
-                </p>
-                {order.isDelivered ? (
-                  <MessageBox variant="success">
-                    Delivered at {order.deliveredAt}
-                  </MessageBox>
-                ) : (
-                  <MessageBox variant="danger">Not Delivered</MessageBox>
-                )}
-              </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Payment</h2>
-                <p>
-                  <strong>Method:</strong> {order.paymentMethod}
-                </p>
-                {order.isPaid ? (
-                  <MessageBox variant="success">
-                    Paid at {order.paidAt}
-                  </MessageBox>
-                ) : (
-                  <MessageBox variant="danger">Not Paid</MessageBox>
-                )}
-              </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Order Items</h2>
-                <ul>
-                  {order.orderItems.map((item) => (
-                    <li key={item.baguetest}>
-                      <div className="row">
-                        <div>
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="small"
-                          ></img>
-                        </div>
-                        <div className="min-30">
-                          <Link to={`/baguetest/${item.baguetest}`}>
-                            <h5 className='name'>{item.name}</h5>
-                          </Link>
-                        </div>
+              <div className='contbody'>
+                  
+              <hr style={{ color:'black'}}>
+                </hr>
+          
+    
+          <div class="section-title-2 text-center mb-60"><h2 className="ob dorey espaci">Order</h2></div>
+      
+           
+      <hr style={{ color:'black'}}>
+                </hr>
+          
 
-                        <div>
-                        <div><strong>Discription</strong></div><br/>
+      <Row style={{marginLeft:'10px' }}>
+        <Col span={8}>
+
+          <h3></h3>
+          <table>
+            <tr>
+              <th>Nom et Prénon:</th>
+              <td>{order.shippingAddress.fullName}</td>
+            </tr>
+            <tr>
+            <th>Adresse:</th>
+            <td>{order.shippingAddress.address},
+                  {order.shippingAddress.city}</td>
+            </tr>
+            <tr>
+              <th>Code Postale:</th>
+              <td> {order.shippingAddress.postalCode}</td>
+            </tr>
+            <tr>
+              <th>Tel:</th>
+              <td>{order.shippingAddress.numtel}</td>
+            </tr>
+          </table>
+         
+        </Col>
+        <Col span={8} offset={8}>
+          <table>
+          <tr>
+              <th>Référence Commande:</th>
+              <td>{order._id}</td>
+            </tr>
+            <tr>
+              <th>Délivrer :</th>
+              <td>{order.isDelivered ? (
+                  <MessageBox variant="success">
+                    délivrer à {order.deliveredAt}
+                  </MessageBox>
+                ) : (
+                  <MessageBox variant="danger">N'est pas délivrer</MessageBox>
+                )}</td>
+            </tr>
+           
+            <tr>
+              <th>Paiement:</th>
+              <td>{order.paymentMethod}<br/>
+              {order.isPaid ? (
+                  <MessageBox variant="success">
+                    Payer le  {order.paidAt}
+                  </MessageBox>
+                ) : (
+                  <MessageBox variant="danger">N'est pas payer</MessageBox>
+                )}
+              </td>
+            </tr>
+          </table>
+        </Col>
+      </Row>
+
+     
+      <table className="table">
+          <thead>
+            <tr>
+              <th>Référence</th>
+              <th>Nom</th>
+              <th>Quantité</th>
+              <th>Détails</th>
+              <th>prix</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {order.orderItems.map((item) => (
+              <tr key={item.baguetest}>
+                <td>{item._id}</td>
+                <td>{item.name}</td>
+                <td>{item.qty}</td>
+                <td> <div><strong>Discription</strong></div><br/>
                         <div><h5>Or : {item.or}</h5></div><br/>
                         {item.choicecarat &&
-                        <div><h5>Carat : {item.carat}</h5></div>}<br/>
-                        <div><h5>Quantité : {item.qty}</h5></div><br/>
-                        
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div className="col-1">
-          <div className="card card-body">
-            <ul>
-              <li>
-                <h2>Order Summary</h2>
-              </li>
-              
-              <li>
-              <div className="row">
-                  <div><strong>Order Total: </strong></div>
-                  {order.choicecarat?(
+                        <div><h5>Carat : {item.carat}</h5></div>}<br/></td>
+                <td> {order.choicecarat?(
                   <div><strong>  
                   {order.totalPrice}dt</strong></div>
                   ):(
                     <div><strong>
-                    {order.itemPrice}</strong>
+                    {order.itemPrice}dt</strong>
+                    </div>
+                  )}</td>
+                  
+                 
+              
+              </tr>
+            ))}
+            <td>
+                  <div><strong>Prix Totale: </strong></div>
+                  {order.choicecarat?(
+                  <div><strong>  
+                  {order. itemsPrice}dt</strong></div>
+                  ):(
+                    <div><strong>
+                    {order. itemsPrice}dt</strong>
                     </div>
                   )}
-              </div>
-          </li>
-            </ul>
-          </div>
-        </div>
+            
+                  </td>
+              
+          </tbody>
+        </table>
+        <Col style={{display:'left'}}>
+          <table>
+            <tr>
+              <th>Bienvenue chez:</th>
+              <td>
+              Joaillerie Diamelle by jarraya</td>
+            </tr>
+            <tr>
+              <th>Adresse:</th>
+              <td>
+              42 complexe carre du lac، la marsa، tunis، les berges du lac 2045</td>
+            </tr>
+            <tr>
+              <th>Contact:</th>
+              <td>
+              70 294 666</td>
+            </tr>
+          </table>
+        </Col>
+
+     
       </div>
     </div>
   );

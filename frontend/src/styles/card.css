@@ -1,26 +1,31 @@
-.ccard {
-    border: 0.1rem #c0c0c0 solid;
-    background-color: #f8f8f8;
-    border-radius: 0.5rem;
-    margin: 1rem;
-  }
-  .ccard-body {
-    padding: 1rem;
-    margin-left: 361px;
+.prow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.prow.pcenter {
+  justify-content: center;
+}
+.prow.ptop {
+  align-items: flex-start;
+}
+.pcol-1 {
+  flex: 1 1 25rem;
+}
+.pcol-2 {
+  flex: 2 1 50rem;
+  width: 676.141px;
+}
+.pmin-30 {
+  min-width: 30rem;
+}
 
-  }
-  .ccard-body > * {
-    margin-bottom: 0.5rem;
-  }
-  .cprice {
-    font-size: 2rem;
-  }
-  h1{
-      text-align: center;
-  }
-  .row1{
-      background-color: white;
-  }
-  .cardli {
-    display: table-row;
+/* Image */
+img {
+  border-radius: 0.5rem;
+}
+img.psmall {
+  max-width: 5rem;
+  width: 100%;
 }

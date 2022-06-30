@@ -40,48 +40,49 @@ export default function RegisterScreen(props) {
      <header className='head' >
        <NavBar/>
                </header>
+               <div className="formu">
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Create Account</h1>
+          <h1>S'inscrire</h1>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Nom et Prénon</label>
           <input
             type="text"
             id="name"
-            placeholder="Enter name"
+            placeholder="Entrer votre nom et votre prénon"
             required
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Adresse Email</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Entrer votre adresse email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mots de passe</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Entrer un mots de passe"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Entrer confirme mots de passe</label>
           <input
             type="password"
             id="confirmPassword"
-            placeholder="Enter confirm password"
+            placeholder="Entrer confirme mots de passe"
             required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
@@ -89,17 +90,18 @@ export default function RegisterScreen(props) {
         <div>
           <label />
           <button className="primari" type="submit">
-            Register
+            S'inscrire
           </button>
         </div>
         <div>
           <label />
           <div>
-            Already have an account?{' '}
-            <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+            vous-avez déja un compte?{' '}
+            <Link className='ob dorey espaci' to={`/signin?redirect=${redirect}`}>Connecter</Link>
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 }

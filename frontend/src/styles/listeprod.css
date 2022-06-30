@@ -39,7 +39,21 @@ div.h6,h6{
     font-weight: 800;
 }
 
-
+label{
+    background-color: white;
+}
+.radio-group {
+    border: groove;
+    display: flex;
+    margin: 20px;
+    border-radius: 10px;
+    border-color: #c29958 !important;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+strong{
+    color: white;
+}
 
 .clear{
     clear: both;
@@ -93,3 +107,41 @@ width: 190px;
 .btn .btn-primary
 {
 background-color: #c29958;}
+
+/***/
+.multi-range-slider {
+    display: flex;
+    position: relative;
+    border: none;
+    padding: 20px 10px;
+    flex-direction: column;
+    width: 293px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+button.small {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.bar-inner,.bar-inner-left,
+.bar-inner-right {
+    background-color:#c29958;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-content: space-between;
+    position: relative;
+    justify-content: space-between;
+}
+.bar-inner-left
+.bar-inner-right{
+    background-color: #ae894f;
+}

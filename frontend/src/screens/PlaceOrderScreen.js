@@ -6,6 +6,9 @@ import CheckoutSteps from "../componnent/CheckoutSteps";
 import { ORDER_CREATE_RESET } from "../constants/orderconstants";
 import LoadingBox from "../componnent/LoadingBox";
 import MessageBox from "../componnent/MessageBox";
+import { Col, Row } from 'antd';
+import 'antd/dist/antd.css';
+import "../styles/order.css";
 import NavBar from "../componnent/Navbar";
 export default function PlaceOrderScreen(props)
 {
@@ -43,121 +46,139 @@ const navigate=useNavigate();
   }, [dispatch, order, navigate, success]);
   
         return(
-        <div className="aboutmain">
+          <div className="aboutmain">
           <header className='head' >
       <NavBar/>
               </header>
 <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>     
-       <div className="row top">
-       <div className="col-2">
-          <ul>
-              <li>
-                  <div className="card card-body">
-                      <h2>shipping</h2>
-                      <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.address},
-                  {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  ,{cart.shippingAddress.country}
-                  </div>
-              </li>
-              <li>
-                  <div className="card card-body">
-                      <h2>Payment</h2>
-                      <p>
-                      <strong>Method:</strong> {cart.paymentMethod}
-                  </p>
-                  </div>
-              </li>
-              <li>
-                  <div className="card card-body">
-                      <h2>Order</h2>
-                      <ul>
-                  {cart.cartItems.map((item) => (
-                    <li key={item.baguetest}>
-                      <div className="row">
-                        <div>
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="small"
-                          ></img>
-                        </div>
-                        <div className="min-30">
-                          <Link to={`/baguetest/${item.baguetest}`}>
-                           <h5 className="name"> {item.name}</h5>
-                          </Link>
-                        </div>
-                       
-                        <div>
-                        <div><strong>Discription</strong></div><br/>
-                        <div><h5>Or : {item.or}</h5></div><br/>
-                        {item.choicecarat &&
-                        <div><h5>Carat : {item.carat}</h5></div>
-                         }
-                         <br/>
-                        <div><h5>Quantité : {item.qty}</h5></div><br/>
-                        {item.choicecarat ?(
-                        <div><h5> Prix Totale: 
-                        {cart.totalPrice }dt</h5>
-                        </div>
-                        ):(
-                          <div><h5> Prix Totale: 
-                        {cart.itemPrice}dt</h5>
-                        </div>
-                        )}
-                        </div>
+
+        <div className='contbody'>
+                  
+                  <hr style={{ color:'black'}}>
+                    </hr>
+              
+        
+              <div class="section-title-2 text-center mb-60"><h2 className="ob dorey espaci">recommandation</h2></div>
+          
+               
+          <hr style={{ color:'black'}}>
+                    </hr>
+              
+    
+          <Row style={{marginLeft:'10px' }}>
+            <Col span={8}>
+    
+              <h3></h3>
+              <table>
+                <tr>
+                  <th>Nom et Prénon:</th>
+                  <td>{cart.shippingAddress.fullName}</td>
+                </tr>
+                <tr>
+                <th>Adresse:</th>
+                <td>{cart.shippingAddress.address},
+                      {cart.shippingAddress.city}</td>
+                </tr>
+                <tr>
+                  <th>Code Postale:</th>
+                  <td> {cart.shippingAddress.postalCode}</td>
+                </tr>
+
+              </table>
+             
+            </Col>
+            <Col span={8} offset={8}>
+              <table>
+              <tr>
+                  <th>Référence recommandation:</th>
+                  <td>{cart._id}</td>
+                </tr>
+
+               
+                <tr>
+                  <th>Paiement:</th>
+                  <td>{cart.paymentMethod}<br/>
+                 
+                  </td>
+                </tr>
+              </table>
+            </Col>
+          </Row>
+    
+         
+          <table className="table">
+              <thead>
+                <tr>
+                  <th>Référence</th>
+                  <th>Nom</th>
+                  <th>Quantité</th>
+                  <th>Détails</th>
+                  <th>prix</th>
+    
+                </tr>
+              </thead>
+              <tbody>
+                {cart.cartItems.map((item) => (
+                  <tr key={item.baguetest}>
+                    <td>{item._id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.carat}</td>
+                    <td>{item.or}</td>
+                    <td>{item.taille}</td>
 
 
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                  </div>
-              </li>
-          </ul>
-       </div>
-       <div className="col-1">
-       <div className="card card-body">
-       <ul>
-          <li>
-             <h2>Order Summary</h2> 
-          </li> 
-       
-          
-          
-          <li>
-              <div className="row">
-                  <div><strong>Order Total: </strong></div>
-                  {cart.choicecarat ?(
+                    <td> <div><strong>Discription</strong></div><br/>
+                            <div><h5>Or : {item.or}</h5></div><br/>
+                           
+                            <div><h5>Support : {item.carat}</h5></div><br/>
+                            <div><h5>Taille : {item.or}</h5></div><br/>
+
+                            </td>
+                  
+                      <div><strong>Prix Totale: </strong></div>
+                      <div><strong>Order Total: </strong></div>
                   <div><strong>  
-                   {cart.itemsPrice}dt</strong></div>
-                   ):(
-                    <div><strong>  
-                   {cart.itemPrice}dt</strong></div>
-                   )}
-              </div>
-          </li>
-          <li>
-                <button
+                   {cart.totalPrice}dt</strong></div><br/>
+                   <div><strong> 
+                      <button
                   type="button"
                   onClick={placeOrderHandler}
-                  className="primary block"
+                  className="primari block"
                   disabled={cart.cartItems.length === 0}
                 >
-                  Place Order
+                  Valider la commande
                 </button>
-              </li>
-              {loading && <LoadingBox></LoadingBox>}
-              {error && <MessageBox variant="danger">{error}</MessageBox>}
-       </ul>
+                </strong>
+                </div> 
 
-       </div>
-
-       </div>
-
-       </div>   
-        
-        
+                
+                </tr>
+                ))}
+              </tbody>
+            </table>
+         
+            <Col style={{display:'left'}}>
+              <table>
+                <tr>
+                  <th>Bienvenue chez:</th>
+                  <td>
+                  Joaillerie Diamelle by jarraya</td>
+                </tr>
+                <tr>
+                  <th>Adresse:</th>
+                  <td>
+                  42 complexe carre du lac، la marsa، tunis، les berges du lac 2045</td>
+                </tr>
+                <tr>
+                  <th>Contact:</th>
+                  <td>
+                  70 294 666</td>
+                </tr>
+              </table>
+            </Col>
+    
+         
+          </div>
         </div>
     )
 }

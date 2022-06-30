@@ -6,9 +6,21 @@
     background-color: white;
 
   }
+  strong {
+    color: black;
+}
   .prow.center {
     justify-content: center;
   }
+  .MuiContainer-root {
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: white;
+}
+.makeStyles-root-1 {
+  display: flex;
+  background-color: white;
+}
   .pcard,
   .pcard-body{
     border: 0.1rem #c0c0c0 solid;

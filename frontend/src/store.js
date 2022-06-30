@@ -3,8 +3,8 @@ import thunk from "redux-thunk";
 import {baguetestListReducer,  baguetestDetailsReducer, baguetestCreateReducer, baguetestUpdateReducer, baguetestDeleteReducer, baguetestCategorieListReducer, baguetestReviewCreateReducer} from './reducers/baguetestReducers';
 import {  cartReducer } from "./reducers/cartReducers";
 import { diamantCreateReducer, diamantDeleteReducer, diamantDetailsReducer, diamantListReducer, DiamantShapeListReducer, diamantUpdateReducer } from "./reducers/diamantReducers";
-import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer } from "./reducers/orderReducers";
-import { commandeCreateReducer, commandeDeleteReducer, commandeDeliverReducer, commandeDetailsReducer, commandeListReducer, commandeMineListReducer } from "./reducers/commandeReducers";
+import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer, orderSummaryReducer } from "./reducers/orderReducers";
+import { commandeCreateReducer, commandeDeleteReducer, commandeDeliverReducer, commandeDetailsReducer, commandeListReducer, commandeMineListReducer, commandeSummaryReducer } from "./reducers/commandeReducers";
 import { recommandationReducer } from "./reducers/recommandationReducers";
 import { userDeleteReducer, userDetailsReducer, userForgotPasswordReducer, userListReducer, userRegisterReducer, userResetPasswordReducer, userSigninReducer, userUpdatePasswordReducer, userUpdateProfileReducer, userUpdateReducer } from "./reducers/userReducers";
 
@@ -79,8 +79,11 @@ const Reducer = combineReducers({
 
     orderDelete: orderDeleteReducer,
     orderDeliver: orderDeliverReducer,
+    orderSummary: orderSummaryReducer,
     commandeDelete: commandeDeleteReducer,
     commandeDeliver: commandeDeliverReducer,
+    commandeSummary: commandeSummaryReducer,
+
     userList: userListReducer,
     userDelete: userDeleteReducer,
     baguetestCategorieList: baguetestCategorieListReducer,

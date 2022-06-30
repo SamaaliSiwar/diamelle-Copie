@@ -66,6 +66,8 @@ const diamantDetails = useSelector((state) => state.diamantDetails);
          
         })
       );
+   
+
   };
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
@@ -203,7 +205,7 @@ const diamantDetails = useSelector((state) => state.diamantDetails);
             
             <div>
               <label></label>
-              <button className="primary" type="submit">
+              <button className="primari" type="submit">
                 Update
               </button>
             </div>

@@ -105,9 +105,10 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
       <header className='head' >
       <NavBar/>
               </header>
+              <div className="formu">
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Edit Product {baguetestId}</h1>
+          <h1>Modifier le produit: {baguetestId}</h1>
         </div>
         {loading ? (
           <LoadingBox></LoadingBox>
@@ -116,21 +117,21 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
         ) : (
           <>
             <div>
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Nom</label>
               <input
                 id="name"
                 type="text"
-                placeholder="Enter name"
+                placeholder="Entrer le nom de produit"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Price</label>
+              <label htmlFor="price">Prix</label>
               <input
                 id="price"
                 type="text"
-                placeholder="Enter price"
+                placeholder="Entrer le prix de produit"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
@@ -140,7 +141,7 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
               <input
                 id="masse"
                 type="text"
-                placeholder="Enter poids"
+                placeholder="Entrer le poids en gramme"
                 value={masse}
                 onChange={(e) => setMasse(e.target.value)}
               ></input>
@@ -149,7 +150,7 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
               <input
                 id="nbrpiere"
                 type="text"
-                placeholder="Enter Nombre de piere"
+                placeholder="Entrer  le nombre de piere"
                 value={nbrpiere}
                 onChange={(e) => setNbrpiere(e.target.value)}
               ></input>
@@ -159,23 +160,23 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
               <input
                 id="image"
                 type="text"
-                placeholder="Enter image"
+                placeholder="Entrer image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="category">Category</label>
+              <label htmlFor="category">Categorie</label>
               <input
                 id="category"
                 type="text"
-                placeholder="Enter category"
+                placeholder="Entrer la  categorie"
                 value={categorie}
                 onChange={(e) => setCategorie(e.target.value)}
               ></input>
               </div>
             <div>
-              <label htmlFor="imageFile">Image File</label>
+              <label htmlFor="imageFile">Fichier image</label>
               <input
                 type="file"
                 id="imageFile"
@@ -188,21 +189,21 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
               )}
             </div>
             <div>
-              <label htmlFor="brand">Brand</label>
+              <label htmlFor="brand">Marque</label>
               <input
                 id="brand"
                 type="text"
-                placeholder="Enter brand"
+                placeholder="Entrer la marque"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="countInStock">Count In Stock</label>
+              <label htmlFor="countInStock">Quantité en stocke</label>
               <input
                 id="countInStock"
                 type="text"
-                placeholder="Enter countInStock"
+                placeholder="saisie la quantité"
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
               ></input>
@@ -213,7 +214,7 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
                 id="description"
                 rows="3"
                 type="text"
-                placeholder="Enter description"
+                placeholder="Entrer description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
@@ -250,13 +251,14 @@ const baguetestDetails = useSelector((state) => state.baguetestDetails);
             </div>
             <div>
               <label></label>
-              <button className="primary" type="submit">
-                Update
+              <button className="primari" type="submit">
+                Mettre à jout
               </button>
             </div>
           </>
         )}
       </form>
+      </div>
     </div>
   );
 }

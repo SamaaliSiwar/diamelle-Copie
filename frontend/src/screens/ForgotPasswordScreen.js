@@ -6,6 +6,8 @@ import LoadingBox from '../componnent/LoadingBox';
 import MessageBox from '../componnent/MessageBox';
 import NavBar from '../componnent/Navbar';
 import { USER_FORGOTPASSWORD_SUCCESS } from '../constants/userconstants';
+import "../styles/formulaire.css"
+
 
 export default function ForgotPasswordScreen(props) {
   const [email, setEmail] = useState('');
@@ -23,7 +25,7 @@ const navigate = useNavigate();
     dispatch(forgotPassword(email,redicectUrl));
     if (USER_FORGOTPASSWORD_SUCCESS)
     {
-      navigate('/sendmail')
+      alert('mail envoyer à votre address')
     }
     else {
       alert('le mail utiliser est incorrect');
@@ -38,17 +40,19 @@ const navigate = useNavigate();
               </header>
   
     <div className="aboutmain">
+    <div className='formu'>
+
       <form className="form" onSubmit={submitHandler} initialvalues={{
         email:email,
         redicectUrl:"http://localhost:3000/forgot "
       }}>
-        <div>
+        
       
-          <h1>Reset Password</h1>
+        <div class="section-title-2 text-center mb-60">
+    <h2 className="ob dorey espaci">Reset Password</h2>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
-        <div>
           <label htmlFor="email">Email address</label>
           <input
             type="email"
@@ -59,13 +63,13 @@ const navigate = useNavigate();
           ></input>
           <div>
           <label />
-          <button  type="submit">
+          <button style={{color:"white"}} type="submit">
             Chercher
           </button>
         </div>
-        </div>
         
       </form>
+      </div>
     </div>
     </>
   );

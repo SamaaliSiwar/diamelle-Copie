@@ -37,29 +37,29 @@ export default function SigninScreen(props) {
       </header>
     
     <div className="aboutmain" >
-    
+    <div className="formu">
       <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Sign In</h1>
-        </div>
+     
+    <div class="section-title-2 text-center mb-60">
+    <h2 className="ob dorey espaci">Connecter</h2></div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Adresse Email</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Entrer votre email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mots de passe</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Entrer Votre mots de passe"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
@@ -67,23 +67,24 @@ export default function SigninScreen(props) {
         <div>
           <label />
           <button className="primari" type="submit">
-            Sign In
+            Connecter
           </button>
         </div>
         <div>
           <label />
           <div>
             
-            <Link to={`/forgot`}>Forget password?</Link>
+            <Link className=' ob dorey espaci' to={`/forgot`}>Mot de passe oblier?</Link>
           </div>
           <div>
-            New customer?{' '}
-            <Link to={`/register?redirect=${redirect}`}><button className='primari' >Create your account</button>
+            Vous n'avez pas de compte?{' '}
+            <Link to={`/register?redirect=${redirect}`}><button className='primari' >Créer un compte</button>
               
             </Link>
           </div>
         </div>
       </form>
+      </div>
     </div>
     </>
   );

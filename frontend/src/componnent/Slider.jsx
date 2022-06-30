@@ -102,7 +102,7 @@ const Slider = () => {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <a className="dropdown-item" href="/about">
+                <a className="dropdown-item" href="/">
                   <div className="dropdownImageContainer">
                     <img
                       className="dropdownImage"
@@ -325,7 +325,7 @@ const Slider = () => {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <a className="dropdown-item" href="/about">
+                <a className="dropdown-item" href="/">
                   <div className="dropdownImageContainer">
                     <img
                       className="dropdownImage"
@@ -546,7 +546,7 @@ const Slider = () => {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <a className="dropdown-item" href="/about">
+                <a className="dropdown-item" href="/">
                   <div className="dropdownImageContainer">
                     <img
                       className="dropdownImage"
@@ -564,7 +564,7 @@ const Slider = () => {
                     <div className="imageLabel">Biographie</div>
                   </div>
                 </a>
-                <a className="dropdown-item" href="/about">
+                <a className="dropdown-item" href="/">
                   <div className="dropdownImageContainer">
                     <img
                       className="dropdownImage"

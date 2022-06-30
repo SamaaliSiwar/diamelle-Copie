@@ -225,3 +225,7 @@ background-color:#151616;
     --bs-bg-opacity: 1;
     background-color: black !important;
 }
+.makeStyles-root-1 {
+  display: flex;
+  background-color: white;
+}

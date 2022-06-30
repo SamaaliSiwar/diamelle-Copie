@@ -1,139 +1,157 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { createDiamant, deleteDiamant, ListeDiamants } from '../actions/diamantActions';
-import LoadingBox from '../componnent/LoadingBox';
-import MessageBox from '../componnent/MessageBox';
-import NavBar from '../componnent/Navbar';
-import { DIAMANT_CREATE_RESET, DIAMANT_DELETE_RESET } from '../constants/diamantconstants ';
+import React from "react";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
 
-export default function DiamantListScreen(props) {
-  const navigate = useNavigate();
-  const { pageNumber = 1 } = useParams();
-  const { pathname } = useLocation();
-  const sellerMode = pathname.indexOf('/seller') >= 0;
-    const diamantList = useSelector((state) => state.diamantList);
-  const { loading, error, diamants,page, pages   } = diamantList;
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import Container from "@material-ui/core/Container";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { mainListItems, secondaryListItems } from "../componnent/ListItems";
+import Diamantlist from "../componnent/Diamantlist";
+import "../styles/listeprod.css";
+import NavBar from "../componnent/Navbar";
 
-  const diamantCreate = useSelector((state) => state.diamantCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    diamant: createdDiamant,
-  } = diamantCreate;
-  const diamantDelete = useSelector((state) => state.diamantDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = diamantDelete;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (successCreate) {
-      dispatch({ type: DIAMANT_CREATE_RESET });
-      navigate(`/diamant/${createdDiamant._id}/edit`);
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
+  toolbar: {
+    paddingRight: 24 // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
+    ...theme.mixins.toolbar
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  menuButton: {
+    marginRight: 36
+  },
+  menuButtonHidden: {
+    display: "none"
+  },
+  title: {
+    flexGrow: 1
+  },
+  drawerPaper: {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  drawerPaperClose: {
+    overflowX: "hidden",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    width: theme.spacing(7),
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9)
     }
-    if (successDelete) {
-      dispatch({ type: DIAMANT_DELETE_RESET });
-    }
-   
-    dispatch(
-      ListeDiamants({seller: sellerMode ? userInfo._id : '', pageNumber})
-      
-    );
-  }, [
-    createdDiamant,
-    dispatch,
-    navigate,
-    successCreate,
-  
-    userInfo._id,
-  ]);
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    // content which is class of main needs to be flex and column direction
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto"
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column"
+  },
+  fixedHeight: {
+    height: 240
+  },
+  // added the footer class
+  footer: {
+    padding: theme.spacing(2),
+    marginTop: "auto",
+    backgroundColor: "white",
+    // just this item, push to bottom
+    alignSelf: "flex-end"
+  }
+}));
 
-  const deleteHandler = (diamant) => {
-    if (window.confirm('Are you sure to delete?')) {
-      dispatch(deleteDiamant(diamant._id));
-    }
+export default function DiamantListScreen() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
-  
-  const createHandler = () => {
-    dispatch(createDiamant());
-
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
   return (
     <div className="aboutmain">
-      <header className='head' >
-      <NavBar/>
-              </header>
-      <div className="row">
-        <h1>Products</h1>
-      
-        <button type="button" className="primary" onClick={createHandler}>
-          Create Product
-        </button>
-        
-      </div>
-      {loadingDelete && <LoadingBox></LoadingBox>}
-      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
-      {loadingCreate && <LoadingBox></LoadingBox>}
-      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
-      {loading ? (
-        <LoadingBox></LoadingBox>
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>SHAPE</th>
-                <th>PRICE</th>
-                <th>CARAT</th>
-                <th>CUT</th>
-                <th>COULEUR</th>
-                <th>CLARITY</th>
-
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {diamants.map((diamant) => (
-                <tr key={diamant._id}>
-                  <td>{diamant._id}</td>
-                  <td>{diamant.shape}</td>
-                  <td>{diamant.price}</td>
-                  <td>{diamant.carat}</td>
-                  <td>{diamant.cut}</td>
-                  <td>{diamant.couleur}</td>
-                  <td>{diamant.clarity}</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="small"
-                      onClick={() => navigate(`/diamant/${diamant._id}/edit`)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="small"
-                      onClick={() => deleteHandler(diamant)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-       
-        </>
-      )}
+<header>
+     
+     <NavBar/>
+</header>
+    <div className={classes.root}>
+      <CssBaseline />
+     
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+        <Diamantlist/>
+        </Container>
+      </main>
+    </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import "../styles/productpage.css";
 
 import { BAGUETEST_REVIEW_CREATE_RESET } from "../constants/baguetestconstants";
 import NavBar from "../componnent/Navbar";
+import { AiOutlineUser } from "react-icons/ai";
 
 
 export default function BaguetestScreen(props)
@@ -89,13 +90,15 @@ export default function BaguetestScreen(props)
               
                 <ul>
                   <li>
-                    <h1 className="prodtitle">{baguetest.name} <p>A partir de {baguetest.price}dt</p></h1>
+                  <div class="section-title-2 text-center mb-60">
+    <h2 className="ob dorey espaci">
+                    {baguetest.name} A partir de {baguetest.price}dt</h2></div>
                   </li><br/>
                   <li>
                   <h2>
                     Description:
                     </h2>
-                    <p className="discrip">{baguetest.description}</p>
+                    <p style={{color:'black'}} className="discrip">{baguetest.description}</p>
                   </li><br/>
                  
                   <li>
@@ -107,7 +110,7 @@ export default function BaguetestScreen(props)
                                   { baguetest.simpleproduct===false &&
                                
                                   <div>
-                                  <strong>Selectionner l'or</strong>
+                                  <strong style={{color:'black'}}>Selectionner l'or</strong>
                                   <div class="radio-group " id="radiogroup2">
                              <input type="radio" id="option-one" name="selector" value="orBlanc" onChange={e=>setOr(e.target.value)}/>
                            <label for="option-one">
@@ -131,7 +134,7 @@ export default function BaguetestScreen(props)
                                           <form>
                                           
                                       
-                                  <strong>Selectionner carat</strong>
+                                  <strong style={{color:'black'}}>Selectionner carat</strong>
                                   <div class="radio-group">
                              <input type="radio" id="propone" name="selector" value="0.4" onChange={e=>setCarat(e.target.value)}/>
                            <label for="propone">
@@ -163,15 +166,15 @@ export default function BaguetestScreen(props)
                       <div className="prow">
                         <div className="discrip">Prix :  </div>
                         {baguetest.choicecarat? (
-                        <div ><p className="price"> {baguetest.masse*127+ carat*baguetest.nbrpiere*2200}dt</p></div>
+                        <div ><p className="price" style={{color:'black'}}> {(baguetest.masse*127+ carat*baguetest.nbrpiere*2200)*qty}dt</p></div>
                         ):(
-                          <div>{baguetest.price}</div>
+                          <div style={{color:'black'}}>{baguetest.price*qty}</div>
                         )}
                       </div>
                     </li><br/>
                     <li>
                       <div className="prow">
-                        <div><p>Status: </p></div>
+                        <div><p style={{color:'black'}}>Status: </p></div>
                         <div>
                           {baguetest.countInStock > 0 ? (
                             <span className="success"><p className="success">  In Stock</p></span>
@@ -205,8 +208,8 @@ export default function BaguetestScreen(props)
                       </li><br/>
                       <li> <button
                          onClick={addToCartHandle}
-                          className="primary block"
-                        >Add to Cart</button>
+                          className="primari block"
+                        >Ajouter au panier</button>
                   </li>
                      
                       </>
@@ -219,24 +222,30 @@ export default function BaguetestScreen(props)
                     </div><br/>
 
                     <div className="pcol-3"> 
-            <h2 id="reviews">Reviews</h2>
+            <h2 id="reviews">Avis</h2>
             {baguetest.reviews.length === 0 && (
-              <MessageBox>There is no review</MessageBox>
+              <MessageBox>Aucun avis trouvé</MessageBox>
             )}
             <ul>
               {baguetest.reviews.map((review) => (
-                <li key={review._id}>
-                  <strong>{review.name}</strong>
-                  <Rating rating={review.rating} caption=" "></Rating>
-                  <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
+                <li style={{display:"flex",
+    flexDirection: "row",
+    backgroundColor:" lightgray",
+    flexWrap:"wrap",
+    alignContent:"stretch",
+    justifyContent:"space-between"}} key={review._id}>
+                  <strong style={{color:"black"}}>   <AiOutlineUser size="20" color="#C29958" ></AiOutlineUser>{review.name}<Rating rating={review.rating} caption=" "></Rating><br/></strong>
+                  
+                  <p style={{color:"black"}}>{review.comment}</p><br/>
+                  <p style={{color:"black", fontSize:"15px"}}>Créé le {review.createdAt.substring(0, 10)}</p>
+
                 </li>
               ))}<br/>
               <li>
                 {userInfo ? (
                   <form  onSubmit={submitHandler}>
                     <div>
-                      <h2>Write a customer review</h2>
+                      <h2>Ajouter un Avis</h2>
                     </div>
                     <div>
                       <label htmlFor="rating">Rating</label><br/>
@@ -254,7 +263,7 @@ export default function BaguetestScreen(props)
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="comment">Comment</label><br/>
+                      <label htmlFor="comment">Commentaire</label><br/>
                       <textarea
                         id="comment"
                         value={comment}
@@ -263,8 +272,8 @@ export default function BaguetestScreen(props)
                     </div>
                     <div>
                       <label />
-                      <button className="primary" type="submit">
-                        Submit
+                      <button className="primari" type="submit">
+                      Ajouter
                       </button>
                     </div>
                     <div>
@@ -278,7 +287,7 @@ export default function BaguetestScreen(props)
                   </form>
                 ) : (
                   <MessageBox>
-                    Please <Link to="/signin">Sign In</Link> to write a review
+                    S'il vous plait <Link to="/signin">Connecter</Link> pour ajouter un avis
                   </MessageBox>
                 )}
               </li>

@@ -123,4 +123,11 @@ a.brand {
     margin: 1rem 0;
     
   }
- 
+  .formu{
+    padding-top: 40px;
+    padding: 154px;
+  }
+  .primari {
+    background-color: #c29958;
+    color: white;
+}

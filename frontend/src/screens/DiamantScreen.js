@@ -7,6 +7,7 @@ import { detailsDiamant } from "../actions/diamantActions";
 import Zoom from "react-img-zoom";
 import NavBar from "../componnent/Navbar";
 import "../styles/productpage.css";
+import { addToRecommandation } from "../actions/recommandationActions";
 export default function DiamantScreen(props)
 { 
   const supportimage={
@@ -26,17 +27,22 @@ export default function DiamantScreen(props)
     const [support, setSupport] = useState("classique");
     const [supportprice, setSupportprice] = useState("0");
 
- 
+ const navigate=useNavigate();
 
     const [taille, setTaille] = useState("52");
+    const checkoutHandler = () => {
+      navigate('/signin?redirect=/laivraison');
+    };
 
     const dispatch=useDispatch();
     useEffect(()=>{
         dispatch(detailsDiamant(diamantId));
       },[dispatch,diamantId]);
-      const addToRecommandationHandle = () => {
-        Navigate (`/recommandation/${diamantId}?&or=${or}&support=${support}&taille=${taille}&supportprice=${supportprice}`);
-        };
+      useEffect(() => {
+        if (diamantId) {
+          dispatch(addToRecommandation(diamantId , or ,support,supportprice,taille));
+        }
+      }, [dispatch, diamantId, or , support , supportprice, taille]);
         
     return(
         <div className="aboutmain">
@@ -50,7 +56,7 @@ export default function DiamantScreen(props)
         ) : (
           <div>
            
-            <div className="prow top">
+            <div className="prow ptop">
               <div className="pcol-2">
             
               <Zoom
@@ -65,10 +71,11 @@ export default function DiamantScreen(props)
               <div className="pcol-1">
               
                 
-                  <p className="discrip"><h2>
-                   {diamant.carat} - carat- Diamant:</h2>avec une piere {diamant.shape}<br/>
+              <div class="section-title-2 text-center mb-60">
+    <h2 className="ob dorey espaci">
+                   {diamant.carat} - carat- Diamant:avec une piere {diamant.shape}<br/>
                     {diamant.cut} cut ||{diamant.clarity} clarity ||{diamant.carat} ct || {diamant.color} couleur<br/>
-                    A : {diamant.price}dt</p>
+                    A partir de : {diamant.price}dt</h2></div>
                     <br/>
                     <h2>Crée vos unique bijoux avec diamelle</h2>
                     
@@ -78,7 +85,7 @@ export default function DiamantScreen(props)
                   
                   <div>
                                   <form >
-                                  <strong>Selectionner le support</strong>
+                                  <strong style={{color:'black'}}>Selectionner le support</strong>
                                   <div class="radio-group">
                              <input type="radio" id="option-one" name="selector" value="Classique"  onChange={e=>setSupport(e.target.value)} onClick={e=>setSupportprice(1500) }/>
                              
@@ -106,8 +113,8 @@ export default function DiamantScreen(props)
                       
                       <div>
                                   <form>
-                                  <strong>sellectionner le Taille</strong>
-                                  <p> la taille de bague est la valeur de la circonférence de l'intérieur de votre bague, exprimée en millimètres.
+                                  <strong style={{color:'black'}}>sellectionner le Taille</strong>
+                                  <p style={{color:'black'}}> la taille de bague est la valeur de la circonférence de l'intérieur de votre bague, exprimée en millimètres.
 
 C'est également la valeur de votre tour de doigt.Donc si votre tour de doigt st de 52 (5,2 centimètres), sa taille de bague est de 52.</p>
                               
@@ -118,7 +125,7 @@ C'est également la valeur de votre tour de doigt.Donc si votre tour de doigt st
               
               <div>
               <form>
-              <strong>Selectionner l'or</strong><br/>
+              <strong style={{color:'black'}}>Selectionner l'or</strong><br/>
               <div class="radio-group " id="radiogroup2">
          <input type="radio" id="one" name="selector" value="orBlanc" onChange={e=>setOr(e.target.value)}/>
        <label for="one">
@@ -144,18 +151,19 @@ C'est également la valeur de votre tour de doigt.Donc si votre tour de doigt st
               </div>
              
 
-              <div className="pcol-1">
-                <div className="pcard pcard-body">
+              <div className="pcol-1" >
+                <div className="pcard pcard-body" style={{backgroundColor:"white"}}>
                   <ul>
                     <li>
                       <div className="prow">
                         <div className="discrip">Prix :  </div>
-                        <div ><p className="price"> {diamant.price+supportprice}dt</p></div>
+                        <div class="section-title-2 text-center mb-60">
+              <h2 className="ob dorey espaci"> {diamant.price+supportprice}dt</h2></div>
                       </div>
                     </li><br/>
                     <li>
                       <div className="prow">
-                        <div><p>Status: </p></div>
+                        <div><p style={{color:'black'}}>Status: </p></div>
                         <div>
                           {diamant.countInStock > 0 ? (
                             <span className="success"><p className="success">  In Stock</p></span>
@@ -173,7 +181,7 @@ C'est également la valeur de votre tour de doigt.Donc si votre tour de doigt st
                      
                       <li> <button
                          
-                          className="primary block" onClick={addToRecommandationHandle}
+                          className="primari block"  onClick={checkoutHandler}
                         >Recommander</button>
                   </li>
                      

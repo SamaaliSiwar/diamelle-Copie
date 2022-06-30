@@ -94,7 +94,7 @@ export default function UserEditScreen(props) {
               ></input>
             </div>
             <div>
-              <button type="submit" className="primary">
+              <button type="submit" className="primari">
                 Update
               </button>
             </div>

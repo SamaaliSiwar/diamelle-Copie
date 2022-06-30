@@ -3,8 +3,15 @@ import { DIAMANTS_SHAPE_LIST_FAIL, DIAMANTS_SHAPE_LIST_REQUEST, DIAMANTS_SHAPE_L
 
 
 export const ListeDiamants = ({  
+  pageNumber = '',
   shape = '',
+  cut = '',
+  couleur = '',
+  clarity = '',
   order = '',
+  min='',
+  max='',
+
 }) => async (
 dispatch
 ) => {
@@ -13,14 +20,14 @@ dispatch({
 });
 try {
  const { data } = await axios.get(
-   `/api/diamants?shape=${shape}&order=${order}`
+   `/api/diamants?pageNumber=${pageNumber}&shape=${shape}&min=${min}&max=${max}&cut=${cut}&couleur=${couleur}&clarity=${clarity}&order=${order}`
  );
  dispatch({ type: DIAMANT_LISTE_SUCCESS, payload: data });
 } catch (error) {
  dispatch({ type: DIAMANT_LISTE_FAIL, payload: error.message });
 }
 };
-
+  
 export const listDiamantShape = () => async (dispatch) => {
   dispatch({
     type: DIAMANTS_SHAPE_LIST_REQUEST,

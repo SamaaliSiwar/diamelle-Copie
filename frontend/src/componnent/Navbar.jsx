@@ -85,7 +85,7 @@ export default function NavBar() {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <a className="dropdown-item" href="/about">
+                <a className="dropdown-item" href="/">
                   <div className="dropdownImageContainer">
                     <img
                       className="dropdownImage"
@@ -94,24 +94,7 @@ export default function NavBar() {
                     <div className="imageLabel">Maison Diamelle</div>
                   </div>
                 </a>
-                <a className="dropdown-item" href="#">
-                  <div className="dropdownImageContainer">
-                    <img
-                      className="dropdownImage"
-                      src="https://diamelle.tn/wp-content/uploads/2021/06/Bague_20210528_204733_0000_resized_20210530_080504231-300x169.jpg"
-                    />
-                    <div className="imageLabel">Biographie</div>
-                  </div>
-                </a>
-                <a className="dropdown-item" href="/about">
-                  <div className="dropdownImageContainer">
-                    <img
-                      className="dropdownImage"
-                      src="http://diamelle.tn/categories/pendentifs/"
-                    />
-                    <div className="imageLabel">Maison écrosponsable</div>
-                  </div>
-                </a>
+               
               </div>
             </li>
             <li className="nav-item dropdown dropdownList">
@@ -142,7 +125,7 @@ export default function NavBar() {
                   <div className="dropdownImageContainer">
                     <img
                       className="dropdownImage"
-                      src="images/collier.jpg"
+                      src="https://diamelle.tn/wp-content/uploads/2021/05/slide3-scaled-100x50.jpg"
                       // "diamelle.tn/wp-content/uploads/2021/05/slide3-scaled-100x50.jpg"
  
                     />

@@ -5,7 +5,6 @@ import { addToCart, removeFromCart} from "../actions/cartActions";
 import MessageBox from "../componnent/MessageBox";
 import NavBar from "../componnent/Navbar";
 import "../styles/card.css";
-import "../styles/productpage.css";
 
 
 export default function CartScreen(props)
@@ -45,15 +44,18 @@ const checkoutHandler = () => {
       <header className='head' >
       <NavBar/>
               </header>
-        
-       <div className="row1">
-        <h1>Shopping Cart</h1><br/>
-        <div className="prow top">
+              <div className="aboutmain">
+              <div class="section-title-2 text-center mb-60">
+              <h2 className="ob dorey espaci">Panier</h2></div>
+        <div className="prow ptop">
         <div className="pcol-2">
+       <div className="prow">
+  
+    
         <br/>
         {cartItems.length === 0 ? (
           <MessageBox>
-            Cart is empty. <Link to="/">Go Shopping</Link>
+            Panier est vide <Link to="/">Aller au shopping</Link>
           </MessageBox>
         ) : (
           <ul>
@@ -63,10 +65,10 @@ const checkoutHandler = () => {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="small"
+                      className="psmall"
                     ></img>
                   </div>
-                  <div className="min-30">
+                  <div className="pmin-30">
                     <Link to={`/baguetest/${item.baguetest}`} className="min">{item.name}</Link>
                   </div>
                   <div>
@@ -85,19 +87,22 @@ const checkoutHandler = () => {
                       ))}
                     </select>
                   </div>
-                  {item.choicecarat ?(
-                  <div>{((item.masse*127+carat*2100)*item.nbrpiere)*qty}dt</div>
-                  ):(
-                    <div>{item.price}</div>
-                  )}
+                  {item.choicecarat? (
+                        <div ><p className="price" style={{color:'black'}}>
+                        {item.price*qty}
+                        </p></div>
+                        ):(
+                          <div style={{color:'black'}}> {(item.masse*127+ carat*item.nbrpiere*2200)*qty}dt</div>
+                        )}
                   <div></div>
 
                   <div>
                     <button
+                    style={{color:"white"}}
                       type="button"
                       onClick={() => removeFromCartHandler(item.baguetest)}
                     >
-                      Delete
+                      supprimer
                     </button>
                   </div>
                 </div>
@@ -107,27 +112,27 @@ const checkoutHandler = () => {
         )}
       </div>
       <div className="pcol-1">
-        <div className="pcard pcard-body ccard-body">
+        <div className="pcard pcard-body pcard-body">
           <ul>
-            <li className="cardli">
+            <li className="pcard">
             {cartItems.choicecarat?(
               <h2>
-              Subtotal 
-             
-            
-              ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
+              Totale 
+              ({cartItems.reduce((a, c) => a + c.qty, 0)} Articles) : 
         
-                {cartItems.reduce((a, c) => a +((c.masse*127+carat*2100*c.nbrpiere)*qty) , 0)}dt
+              {cartItems.reduce((a, c) => a +(c.price)*c.qty , 0)}dt
               </h2>
               ):(
                 <h2>
-                  Subtotal
-                  ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : 
-                  {cartItems.reduce((a, c) => a +((c.price)*qty) , 0)}
+                  Totale
+                  ({cartItems.reduce((a, c) => a + c.qty, 0)} Article) : 
+                  {cartItems.reduce((a, c) => a +((c.masse*127+ carat*c.nbrpiere*2200)*c.qty) , 0)}dt
+                 
+                
                 </h2>
               )}
-            </li>
-            <li className="cardli">
+            </li><br/>
+            <li>
               <button
                 type="button"
                 onClick={checkoutHandler}
@@ -141,6 +146,7 @@ const checkoutHandler = () => {
           </ul>
         </div>
             </div>
+        </div>
         </div>
         </div>
         </>

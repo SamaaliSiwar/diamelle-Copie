@@ -18,7 +18,7 @@ export default function ShippingAddressScreen(props) {
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
-  const [numtel, setNumtel] = useState(shippingAddress.numtel);
+  const [phoneNumber, setphoneNumber] = useState(shippingAddress.phoneNumber);
   if (!userInfo) {
     navigate('/signin');
   }
@@ -26,7 +26,7 @@ export default function ShippingAddressScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveShippingAddress({ fullName, address, city, postalCode, numtel })
+      saveShippingAddress({ fullName, address, city, postalCode,phoneNumber })
     );
     navigate('/payment');
   };
@@ -37,16 +37,16 @@ export default function ShippingAddressScreen(props) {
                </header>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Shipping Address</h1>
+      <div class="section-title-2 text-center mb-60">
+              <h2 className="ob dorey espaci">Address de laivraison</h2>
         </div>
         
         <div>
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="fullName">Nom et Prénon</label>
           <input
             type="text"
             id="fullName"
-            placeholder="Enter full name"
+            placeholder="Entrer Votre nom et votre prénon"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
@@ -57,29 +57,29 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="address"
-            placeholder="Enter address"
+            placeholder="Entrer votre address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">Cité</label>
           <input
             type="text"
             id="city"
-            placeholder="Enter city"
+            placeholder="Entrer le nom de votre cité"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="postalCode">Postal Code</label>
+          <label htmlFor="postalCode">Code Postal</label>
           <input
             type="text"
             id="postalCode"
-            placeholder="Enter postal code"
+            placeholder="Entrer votre code postale"
             value={postalCode}
             onChange={(e) => setPostalCode(e.target.value)}
             required
@@ -90,15 +90,15 @@ export default function ShippingAddressScreen(props) {
           <input
             type="text"
             id="numtel"
-            placeholder="Enter Your phone number"
-            value={numtel}
-            onChange={(e) => setNumtel(e.target.value)}
+            placeholder="Entrer votre numéro de téléphone"
+            value={phoneNumber}
+            onChange={(e) => setphoneNumber(e.target.value)}
             required
           ></input>
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primari" type="submit">
             Continue
           </button>
         </div>

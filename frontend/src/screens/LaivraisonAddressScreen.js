@@ -97,7 +97,7 @@ export default function LaivraisonAddressScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primari" type="submit">
             Continue
           </button>
         </div>

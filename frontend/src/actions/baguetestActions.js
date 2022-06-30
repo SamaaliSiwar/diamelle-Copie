@@ -11,6 +11,7 @@ import { BAGUETEST_CATEGORY_LIST_FAIL, BAGUETEST_CATEGORY_LIST_REQUEST, BAGUETES
    BAGUETEST_UPDATE_SUCCESS} from "../constants/baguetestconstants";
 
    export const ListeBaguestest = ({  
+    pageNumber = '',
      name = '',
      categorie = '',
      order = '',
@@ -23,7 +24,7 @@ import { BAGUETEST_CATEGORY_LIST_FAIL, BAGUETEST_CATEGORY_LIST_REQUEST, BAGUETES
     });
     try {
       const { data } = await axios.get(
-        `/api/baguestest?categorie=${categorie}&name=${name}&order=${order}`
+        `/api/baguestest?pageNumber=${pageNumber}&categorie=${categorie}&name=${name}&order=${order}`
       );
       dispatch({ type: BAGUETEST_LISTE_SUCCESS, payload: data });
     } catch (error) {

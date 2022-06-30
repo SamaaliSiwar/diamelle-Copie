@@ -22,6 +22,7 @@ import Creation from "../componnent/Creation";
 import { ListeDiamants } from "../actions/diamantActions";
 import { Link } from "react-router-dom";
 import Swatch from "../componnent/swatch";
+import Product from "../componnent/Product";
 export default function HomeScreen() {
   const dispatch= useDispatch();
   const baguetestList = useSelector((state) => state.baguetestList);
@@ -75,8 +76,10 @@ export default function HomeScreen() {
                 
                 
        <div>
+  
      
        <Carousel breakPoints={breakPoints} autoPlay={5000}>
+       
               {baguestest && baguestest.map((baguestest) => (
                 <Baguetest
                   key={baguestest._id}
@@ -114,11 +117,11 @@ export default function HomeScreen() {
             </div>
             <Carousel breakPoints={breakPoints} autoPlay={5000}>
               {diamants && diamants.map((baguestest) => (
-                <Baguetest
+                <Product
                   key={baguestest._id}
                   baguetest={baguestest}
                  
-                ></Baguetest>
+                ></Product>
               ))}
               </Carousel>
 

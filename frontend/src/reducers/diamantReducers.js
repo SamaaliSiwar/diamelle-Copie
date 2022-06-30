@@ -8,7 +8,12 @@ export const diamantListReducer = (state ={loading:true ,diamants:[]}
         case DIAMANT_LISTE_REQUEST:
             return{loading: true};
         case DIAMANT_LISTE_SUCCESS:
-            return{loading: false,diamants:action.payload};
+          return {
+            loading: false,
+            diamants: action.payload.diamants,
+            pages: action.payload.pages,
+            page: action.payload.page,
+          };
         case DIAMANT_LISTE_FAIL:
             return{loading:false,error:action.payload };  
             default:

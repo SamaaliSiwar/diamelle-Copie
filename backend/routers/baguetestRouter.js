@@ -9,6 +9,8 @@ const baguetestRouter = express.Router();
 baguetestRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
+    const pageSize = 3;
+    const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const categorie = req.query.categorie || '';
     const order = req.query.order || '';
@@ -23,12 +25,21 @@ baguetestRouter.get(
     : order === 'toprated'
     ? { rating: -1 }
     : { _id: -1 };
-      const baguestest = await Baguetest.find({
-        ...nameFilter,
-        ...categorieFilter,
-      }).sort(sortOrder);
-    
-    res.send(baguestest);
+    const count = await Baguetest.count({
+  
+      ...nameFilter,
+      ...categorieFilter,
+     
+    });
+    const baguestest = await  Baguetest.find({
+      ...nameFilter,
+      ...categorieFilter,
+   
+    })
+      .sort(sortOrder)
+      .skip(pageSize * (page - 1))
+      .limit(pageSize);
+    res.send({ baguestest, page, pages: Math.ceil(count / pageSize) });
   })
 );
 baguetestRouter.get(

@@ -1,0 +1,9 @@
+.paiment {
+    position: inherit;
+    visibility: initial;
+    display: inline-flex;
+    flex-wrap: nowrap;
+}
+  .row .checkout-steps{
+    width: 1057.5px;
+  }

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function SearchBox() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
+  
   const submitHandler = (e) => {
     e.preventDefault();
     navigate(`/search/name/${name}`);
@@ -20,7 +21,7 @@ export default function SearchBox() {
           id="q"
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <button className="primary" type="submit">
+        <button className="primari" type="submit">
           <i className="fa fa-search"></i>
         </button>
       </div>

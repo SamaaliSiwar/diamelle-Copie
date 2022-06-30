@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const userRouter = express.Router();
 const user = "diamellepfe@gmail.com";
-const pass = "diamelle12345";
+const pass = "oznumkplfnyqwjte";
 const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -163,12 +163,7 @@ userRouter.post(
 //proceesd with email
 sendResetEmail(data[0],redicectUrl,res);
 }
-else{
-res.json({
-  status:"FAILED",
-  message:"No account with this email"
-})
-}
+
   })
   .catch(error=>{
     console.log(error);

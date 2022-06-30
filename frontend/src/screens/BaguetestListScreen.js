@@ -1,137 +1,156 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { createBaguetest, deleteBaguetest, ListeBaguestest } from '../actions/baguetestActions';
-import LoadingBox from '../componnent/LoadingBox';
-import MessageBox from '../componnent/MessageBox';
-import NavBar from '../componnent/Navbar';
-import { BAGUETEST_CREATE_RESET, BAGUETEST_DELETE_RESET } from '../constants/baguetestconstants';
+import React from "react";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
 
-export default function BaguetestListScreen(props) {
-  const navigate = useNavigate();
-  const { pageNumber = 1 } = useParams();
-  const { pathname } = useLocation();
-  const sellerMode = pathname.indexOf('/seller') >= 0;
-  const baguetestList = useSelector((state) => state.baguetestList);
-  const { loading, error, baguestest, page, pages } = baguetestList;
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import Container from "@material-ui/core/Container";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { mainListItems, secondaryListItems } from "../componnent/ListItems";
+import BaguetestList from "../componnent/BaguetestList";
+import NavBar from "../componnent/Navbar";
 
-  const baguetestCreate = useSelector((state) => state.baguetestCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    baguetest: createdBaguetest,
-  } = baguetestCreate;
-  const baguetestDelete = useSelector((state) => state.baguetestDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = baguetestDelete;
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (successCreate) {
-      dispatch({ type: BAGUETEST_CREATE_RESET });
-      navigate(`/baguetest/${createdBaguetest._id}/edit`);
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
+  toolbar: {
+    paddingRight: 24 // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
+    ...theme.mixins.toolbar
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  menuButton: {
+    marginRight: 36
+  },
+  menuButtonHidden: {
+    display: "none"
+  },
+  title: {
+    flexGrow: 1
+  },
+  drawerPaper: {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  drawerPaperClose: {
+    overflowX: "hidden",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    width: theme.spacing(7),
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9)
     }
-    if (successDelete) {
-      dispatch({ type: BAGUETEST_DELETE_RESET });
-    }
-   
-    dispatch(
-      ListeBaguestest({ seller: sellerMode ? userInfo._id : '', pageNumber })
-    );
-  }, [
-    createdBaguetest,
-    dispatch,
-    navigate,
-    sellerMode,
-    successCreate,
-  
-    userInfo._id,
-    pageNumber,
-  ]);
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    // content which is class of main needs to be flex and column direction
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto"
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column"
+  },
+  fixedHeight: {
+    height: 240
+  },
+  // added the footer class
+  footer: {
+    padding: theme.spacing(2),
+    marginTop: "auto",
+    backgroundColor: "white",
+    // just this item, push to bottom
+    alignSelf: "flex-end"
+  }
+}));
 
-  const deleteHandler = (baguetest) => {
-    if (window.confirm('Are you sure to delete?')) {
-      dispatch(deleteBaguetest(baguetest._id));
-      window.location.reload('/baguetestlist');
-
-    }
+export default function Dashboard() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
-  
-  const createHandler = () => {
-    dispatch(createBaguetest());
-
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
   return (
     <div className="aboutmain">
-      <header className='head' >
-      <NavBar/>
-              </header>
-      <div className="row">
-        <h1>Products</h1>
-      
-        <button type="button" className="primary" onClick={createHandler}>
-          Create Product
-        </button>
-        
-      </div>
-      {loadingDelete && <LoadingBox></LoadingBox>}
-      {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
-      {loadingCreate && <LoadingBox></LoadingBox>}
-      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
-      {loading ? (
-        <LoadingBox></LoadingBox>
-      ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
-      ) : (
-        <>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {baguestest.map((baguetest) => (
-                <tr key={baguetest._id}>
-                  <td>{baguetest._id}</td>
-                  <td>{baguetest.name}</td>
-                  <td>{baguetest.price}</td>
-                  <td>{baguetest.category}</td>
-                  <td>{baguetest.brand}</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="small"
-                      onClick={() => navigate(`/baguetest/${baguetest._id}/edit`)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="small"
-                      onClick={() => deleteHandler(baguetest)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-       
-        </>
-      )}
+<header>
+     
+     <NavBar/>
+</header>
+    <div className={classes.root}>
+      <CssBaseline />
+     
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.appBarSpacer} />
+        <Container maxWidth="lg" className={classes.container}>
+        <BaguetestList/>
+        </Container>
+      </main>
+    </div>
     </div>
   );
 }

@@ -13,6 +13,15 @@ useEffect(()=>{
       if(command === 'testcommand'){
         navigate('/search/categorie/:categorie')
       }
+      if(command === 'testcommanddia'){
+        navigate('/seachdiamant/shape/:shape')
+      }
+      if(command === 'signincmd'){
+        navigate('/signin')
+      }
+      if(command === 'registercmd'){
+        navigate('/register')
+      }
       if(command === 'testcommand2'){
         navigate('search/categorie/fiançailles')
       }

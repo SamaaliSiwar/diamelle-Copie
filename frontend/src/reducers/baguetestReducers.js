@@ -7,7 +7,12 @@ export const baguetestListReducer = (state ={loading:true ,baguestest:[]}
         case BAGUETEST_LISTE_REQUEST:
             return{loading: true};
         case BAGUETEST_LISTE_SUCCESS:
-            return{loading: false,baguestest:action.payload};
+          return {
+            loading: false,
+            baguestest: action.payload.baguestest,
+            pages: action.payload.pages,
+            page: action.payload.page,
+          };
         case BAGUETEST_LISTE_FAIL:
             return{loading:false,error:action.payload };  
             default:

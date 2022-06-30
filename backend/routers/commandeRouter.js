@@ -1,6 +1,8 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
+import Diamant from '../models/diamantModel.js';
 import Commande from '../models/commandeModel.js';
+import User from '../models/userModel.js';
 import { isAdmin, isAuth } from '../util.js';
 
 const commandeRouter = express.Router();
@@ -86,6 +88,33 @@ commandeRouter.put(
     }
   })
 );
+commandeRouter.get(
+  '/summary',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+   
+    const users = await User.aggregate([
+      {
+        $group: {
+          _id: null,
+          numUsers: { $sum: 1 },
+        },
+      },
+    ]);
+  
+    const diamantShapes = await   Diamant.aggregate([
+      {
+        $group: {
+          _id: '$categorie',
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    res.send({ users,  diamantShapes });
+  })
+);
+
 
 
 export default  commandeRouter;

@@ -11,12 +11,14 @@ import "../styles/listeprod.css";
 
 export default function SearchScreen(props) {
   const navigate = useNavigate();
-  const { name = 'all'  ,
+  const {
+    pageNumber = 1,
+         name = 'all'  ,
   categorie = 'all' ,
   order = 'newest',} = useParams();
   const dispatch = useDispatch();
   const baguetestList = useSelector((state) => state.baguetestList);
-  const { loading, error, baguestest } = baguetestList;
+  const { loading, error, baguestest , page, pages } = baguetestList;
   const baguetestCategorieList = useSelector((state) => state.baguetestCategorieList);
   const {
     loading: loadingCategories,
@@ -27,15 +29,16 @@ export default function SearchScreen(props) {
     dispatch(ListeBaguestest(
       { name: name !== 'all' ? name : '' ,
       categorie: categorie !== 'all' ? categorie : '',
-      order,}));
+      order, pageNumber}));
 
-  }, [dispatch, name , order, categorie]);
+  }, [dispatch, name , order, categorie, pageNumber]);
   const getFilterUrl = (filter) => {
+    const filterPage = filter.page || pageNumber;
     const filterCategorie = filter.categorie || categorie;
     const filterName = filter.name || name;
     const sortOrder = filter.order || order;
   
-    return `/search/categorie/${filterCategorie}/name/${filterName}/order/${sortOrder}`;
+    return `/search/categorie/${filterCategorie}/name/${filterName}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
     <div className="aboutmain">
@@ -125,7 +128,7 @@ export default function SearchScreen(props) {
                                         <div class="text-muted rebate"></div>
                                     </div>
                                     <Link to={`/baguetest/${baguetest._id}`}>
-                                    <div class="btn btn-primary">ajouter au panier</div>
+                                    <div class="btn btn-primari">ajouter au panier</div>
                                     </Link>
                                 </div>
                             </div>
@@ -135,6 +138,17 @@ export default function SearchScreen(props) {
             
               </div>
               }
+              <div className="pagination">
+              {[...Array(pages).keys()].map((x) => (
+                  <Link
+                    className={x + 1 === page ? 'active' : ''}
+                    key={x + 1}
+                    to={getFilterUrl({ page: x + 1 })}
+                  >
+                    {x + 1}
+                  </Link>
+                ))}
+            </div>
               
             </>
           )}

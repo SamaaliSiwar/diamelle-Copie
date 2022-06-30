@@ -15,17 +15,28 @@ app.use(express.json());
 app.use('/api/uploads', uploadRouter);
 
 app.use(express.urlencoded({extended: true}));
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://127.0.0.1/diamelle');
+mongoose
+  .connect(process.env.MONGODB_LOCAL_URI)
+  .then(() => {
+    console.log('connected to db');
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
 app.use('/api/users', userRouter);
 app.use('/api/baguestest', baguetestRouter);
 app.use('/api/diamants', diamantRouter);
 app.use('/api/orders', orderRouter);
+
 app.use('/api/commandes', commandeRouter);
 
-
-
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads/')));
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+);
 
 
 app.get('/', (req, res) => {
@@ -34,7 +45,7 @@ app.get('/', (req, res) => {
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5050;
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
 });

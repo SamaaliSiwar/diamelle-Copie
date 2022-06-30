@@ -26,7 +26,6 @@ import { useSelector } from 'react-redux';
 
 import Support from './screens/SupportScreen';
 import DiamantScreen from './screens/DiamantScreen';
-import RecommandationScreen from './screens/RecommandationScreen';
 import LaivraisonAddressScreen from './screens/LaivraisonAddressScreen';
 import PaymentRecommandationScreen from './screens/PaymentRecommandationScreen';
 import PlaceRecommandationScreen from './screens/PlaceCommandeScreen';
@@ -41,6 +40,7 @@ import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import SendEmailScreen from './screens/SendEmailScreen';
 import Footer from './componnent/Footer';
 import { black } from 'color-name';
+import DashboardScreen from './screens/DashbordScreen';
 
 function App () {
   const userSignin = useSelector((state) => state.userSignin);
@@ -55,8 +55,6 @@ function App () {
         <Routes>
         <Route path="/cart" element={<CartScreen/>}></Route>
   <Route path="/cart/:id" element={<CartScreen/>}></Route>
-  <Route path="/recommandation" element={<RecommandationScreen/>}></Route>
-  <Route path="/recommandation/:id" element={<RecommandationScreen/>}></Route>
         <Route path="/" element={ <HomeScreen/> } exact></Route>
         <Route path="/diamants" element={ <AlldiamantScreen/> } exact></Route>
 
@@ -156,10 +154,34 @@ function App () {
               }
             />
              <Route
+              path="/baguetestlist/pageNumber/:pageNumber"
+              element={
+                <AdminRoute>
+              <BaguetestListScreen/>
+                </AdminRoute>
+              }
+            />
+             <Route
+              path="/diamantlist/pageNumber/:pageNumber"
+              element={
+                <AdminRoute>
+              <DiamantListScreen/>
+                </AdminRoute>
+              }
+            />
+             <Route
               path="/baguetestlist"
               element={
                 <AdminRoute>
               <BaguetestListScreen/>
+                </AdminRoute>
+              }
+            />
+               <Route
+              path="/dashbord"
+              element={
+                <AdminRoute>
+              <DashboardScreen/>
                 </AdminRoute>
               }
             />
@@ -207,12 +229,12 @@ function App () {
             exact
           ></Route>
           <Route
-            path="/search/categorie/:categorie/name/:name"
+            path="/search/categorie/:categorie/name/:name/pageNumber/:pageNumber"
             element={<SearchScreen/>}
             exact
           ></Route>
           <Route
-            path="/search/categorie/:categorie/name/:name/order/:order"
+            path="/search/categorie/:categorie/name/:name/order/:order/pageNumber/:pageNumber"
             element={<SearchScreen/>}
             exact
           ></Route>
@@ -224,7 +246,7 @@ function App () {
             exact
           ></Route>
             <Route
-            path="/searchdiamant/shape/:shape/order/:order"
+            path="/searchdiamant/shape/:shape/min/:min/max/:max/cut/:cut/couleur/:couleur/clarity/:clarity/order/:order/pageNumber/:pageNumber"
             element={<AlldiamantScreen/>}
             exact
           ></Route>
@@ -235,6 +257,11 @@ function App () {
             ></Route>
           <Route
             path="/diamants"
+            element={<AlldiamantScreen/>}
+            exact
+          ></Route>
+          <Route
+            path="/diamants/pageNumber/:pageNumber"
             element={<AlldiamantScreen/>}
             exact
           ></Route>

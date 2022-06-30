@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { COMMANDE_CREATE_FAIL, COMMANDE_CREATE_REQUEST, COMMANDE_CREATE_SUCCESS, COMMANDE_DELETE_FAIL, COMMANDE_DELETE_REQUEST, COMMANDE_DELETE_SUCCESS, COMMANDE_DELIVER_FAIL, COMMANDE_DELIVER_REQUEST, COMMANDE_DELIVER_SUCCESS, COMMANDE_DETAILS_FAIL, COMMANDE_DETAILS_REQUEST, COMMANDE_DETAILS_SUCCESS, COMMANDE_LIST_FAIL, COMMANDE_LIST_REQUEST, COMMANDE_LIST_SUCCESS, COMMANDE_MINE_LIST_REQUEST, COMMANDE_MINE_LIST_SUCCESS, COMMANDE_PAY_FAIL, COMMANDE_PAY_REQUEST, COMMANDE_PAY_SUCCESS } from '../constants/commandeconstants';
-import { ORDER_MINE_LIST_FAIL } from '../constants/orderconstants';
+import { ORDER_CREATE_FAIL, ORDER_MINE_LIST_FAIL, ORDER_SUMMARY_REQUEST, ORDER_SUMMARY_SUCCESS } from '../constants/orderconstants';
 import { RECOMMANDATION__EMPTY } from '../constants/recommandationconstants';
 
 
@@ -144,5 +144,25 @@ export const deliverCommande = (commandeId) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message;
     dispatch({ type: COMMANDE_DELIVER_FAIL, payload: message });
+  }
+};
+export const summaryCommande = () => async (dispatch, getState) => {
+  dispatch({ type: ORDER_SUMMARY_REQUEST });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.get('/api/commandes/summary', {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
   }
 };
